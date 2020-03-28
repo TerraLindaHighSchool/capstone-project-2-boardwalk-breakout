@@ -9,10 +9,11 @@ public class Follow : MonoBehaviour
     [SerializeField] private float offset = 2.0f;
     private List<GameObject> kiddos = new List<GameObject>();
     private GameObject player;
-
+    private NavMeshAgent navMeshAgent;
     private void Start()
     {
         player = this.gameObject;
+        navMeshAgent = gameObject.GetComponentInChildren<NavMeshAgent>();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -32,6 +33,8 @@ public class Follow : MonoBehaviour
         {
             kiddos[z].GetComponent<NavMeshAgent>().stoppingDistance = offset;
             kiddos[z].GetComponent<NavMeshAgent>().SetDestination(player.transform.position);
+            if (navMeshAgent.hasPath)
+                navMeshAgent.acceleration = (navMeshAgent.remainingDistance < closeEnoughMeters) ? deceleration : acceleration;
         }
     }
 }
