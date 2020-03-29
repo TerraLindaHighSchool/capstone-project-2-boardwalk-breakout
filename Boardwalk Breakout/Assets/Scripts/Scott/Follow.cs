@@ -33,8 +33,8 @@ public class Follow : MonoBehaviour
         {
             kiddos[z].GetComponent<NavMeshAgent>().stoppingDistance = offset;
             kiddos[z].GetComponent<NavMeshAgent>().SetDestination(player.transform.position);
-            if (navMeshAgent.hasPath)
-                navMeshAgent.acceleration = (navMeshAgent.remainingDistance < closeEnoughMeters) ? deceleration : acceleration;
+            //if (navMeshAgent.hasPath)
+               // navMeshAgent.acceleration = (navMeshAgent.remainingDistance < closeEnoughMeters) ? deceleration : acceleration;
         }
     }
 }
