@@ -10,6 +10,7 @@ public class FollowTest : MonoBehaviour
     public List<GameObject> plushies = new List<GameObject>();
     private GameObject player;
     private NavMeshAgent navMeshAgent;
+
     private void Start()
     {
         player = this.gameObject;
@@ -19,7 +20,7 @@ public class FollowTest : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         //if (collision.gameObject.tag.Equals("Plushie"))
-            //splushies.Add(collision.gameObject);
+            //plushies.Add(collision.gameObject);
     }
 
     void Update()
@@ -29,6 +30,5 @@ public class FollowTest : MonoBehaviour
             plushies[z].GetComponent<NavMeshAgent>().stoppingDistance = offset;
             plushies[z].GetComponent<NavMeshAgent>().SetDestination(player.transform.position);
         }
-        transform.LookAt(player.transform);
     }
 }
