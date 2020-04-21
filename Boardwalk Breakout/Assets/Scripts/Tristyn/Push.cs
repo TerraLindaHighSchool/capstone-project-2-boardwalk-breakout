@@ -1,28 +1,26 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
 
-public class Push : MonoBehaviour
+public class ObjectPhysics : MonoBehaviour
 {
-    /*
-     *The object has to be a heavy mass if it has to take multiple plushies to move it
-     * Or Increase the ground friction
-     */
-    Rigidbody rigidbody;
-    float pushPower = 5.0f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        rigidbody = GetComponent<Rigidbody>();
-    }
+    public float pushForce = 2.0f;
 
-    // Update is called once per frame
-    void Update()
+    /*Definition of On ControllerColliderHit
+     * OnControllerColliderHit is called when the controller hits a collider while performing a Move.
+     *This can be used to push objects when they collide with the character.
+    */
+
+    void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            rigidbody.AddForce(Vector3.left * pushPower);
-        }
+        Rigidbody body = hit.collider.attachedRigidbody;
+        if (body == null || body.isKinematic)
+            return;
+
+        if (hit.moveDirection.y < -.3f)
+            return;
+
+        Vector3 pushDirection = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
+        body.velocity = pushForce * pushDirection;
     }
 }
