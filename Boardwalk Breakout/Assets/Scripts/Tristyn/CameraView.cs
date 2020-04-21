@@ -4,17 +4,21 @@ using UnityEngine;
 
 public class CameraView : MonoBehaviour
 {
-    public float sensitivity = 10f;
-    public float maxYAngle = 80f;
-    private Vector2 currentRotation;
+    public bool ShowCursor;
+    public float Sensitivity;
+
+    void Start()
+    {
+        if(ShowCursor == false)
+        {
+            Cursor.visible = false;
+        }
+    }
+
     void Update()
     {
-        currentRotation.x += Input.GetAxis("Mouse X") * sensitivity;
-        currentRotation.y -= Input.GetAxis("Mouse Y") * sensitivity;
-        currentRotation.x = Mathf.Repeat(currentRotation.x, 360);
-        currentRotation.y = Mathf.Clamp(currentRotation.y, -maxYAngle, maxYAngle);
-        Camera.main.transform.rotation = Quaternion.Euler(currentRotation.y, currentRotation.x, 0);
-        if (Input.GetMouseButtonDown(0))
-            Cursor.lockState = CursorLockMode.Locked;
+        float newRotationY = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * Sensitivity;
+        gameObject.transform.localEulerAngles = new Vector3(0, newRotationY, 0);
+        
     }
 }
