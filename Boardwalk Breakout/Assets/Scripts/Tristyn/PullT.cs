@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pull : MonoBehaviour
+public class PullT : MonoBehaviour
 {
     //This isn't working
 

@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Push : MonoBehaviour
+public class Pull : MonoBehaviour
 {
     public int numPlushReq;
-    public float speed = 3;
-    public GameObject objectPushed;
+    public float speed = 10;
+    public GameObject objectPulled;
 
     [Header("Direction")]
-    [SerializeField]
-    bool forward;
     [SerializeField]
     bool backward;
     [SerializeField]
@@ -44,18 +42,15 @@ public class Push : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(numPlush >= numPlushReq)
+        if (numPlush >= numPlushReq)
         {
-            //z axis (blue)
-            if(forward)
-                objectPushed.transform.position += transform.forward * Time.deltaTime * speed;
             if (backward)
-                objectPushed.transform.position -= transform.forward * Time.deltaTime * speed;
+                objectPulled.transform.position += transform.forward * Time.deltaTime * speed;
             //x axis (red)
             if (right)
-                objectPushed.transform.position += transform.right * Time.deltaTime * speed;
+                objectPulled.transform.position -= transform.right * Time.deltaTime * speed;
             if (left)
-                objectPushed.transform.position -= transform.right * Time.deltaTime * speed;
+                objectPulled.transform.position += transform.right * Time.deltaTime * speed;
         }
     }
 }

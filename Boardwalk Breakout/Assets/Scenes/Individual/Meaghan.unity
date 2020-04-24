@@ -274,15 +274,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 53944264}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1385513a004a4c268b8cbdb2416f902, type: 3}
+  m_Script: {fileID: 11500000, guid: cc7841a18ff193842aeee46396588211, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   numPlushReq: 1
   speed: 5
-  objectPushed: {fileID: 8218822}
-  forward: 0
-  backward: 0
-  left: 1
+  objectPulled: {fileID: 8218822}
+  backward: 1
+  left: 0
   right: 0
 --- !u!65 &53944267
 BoxCollider:
@@ -665,6 +664,7 @@ GameObject:
   - component: {fileID: 788390231}
   - component: {fileID: 788390230}
   - component: {fileID: 788390235}
+  - component: {fileID: 788390236}
   m_Layer: 0
   m_Name: Plushie (1)
   m_TagString: Player
@@ -784,6 +784,21 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &788390236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 788390229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b03fe675d5dee24990b6d1d5a180999, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: 10
+  player: {fileID: 1077231148}
+  targetObj: {fileID: 8218822}
 --- !u!1 &890574606
 GameObject:
   m_ObjectHideFlags: 3
@@ -877,6 +892,7 @@ GameObject:
   - component: {fileID: 933847972}
   - component: {fileID: 933847971}
   - component: {fileID: 933847976}
+  - component: {fileID: 933847977}
   m_Layer: 0
   m_Name: Plushie (2)
   m_TagString: Plushie
@@ -996,6 +1012,21 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &933847977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 933847970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b03fe675d5dee24990b6d1d5a180999, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: 10
+  player: {fileID: 1077231148}
+  targetObj: {fileID: 8218822}
 --- !u!1 &1046325805
 GameObject:
   m_ObjectHideFlags: 0
@@ -1502,6 +1533,7 @@ GameObject:
   - component: {fileID: 1369491929}
   - component: {fileID: 1369491928}
   - component: {fileID: 1369491933}
+  - component: {fileID: 1369491934}
   m_Layer: 0
   m_Name: Plushie
   m_TagString: Player
@@ -1621,6 +1653,21 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &1369491934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1369491927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b03fe675d5dee24990b6d1d5a180999, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: 10
+  player: {fileID: 1077231148}
+  targetObj: {fileID: 8218822}
 --- !u!1 &1559296403
 GameObject:
   m_ObjectHideFlags: 0
