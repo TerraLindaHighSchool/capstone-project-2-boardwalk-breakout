@@ -23,11 +23,12 @@ public class ThirdPersonCameraController : MonoBehaviour
 	{
 		mouseX += Input.GetAxis("Mouse X") * RotationSpeed;
 		mouseY -= Input.GetAxis("Mouse Y") * RotationSpeed;
-		mouseY = Mathf.Clamp(mouseY, -35, 60);
+		mouseY = Mathf.Clamp(mouseY, -10, 60);
+		mouseX = Mathf.Clamp(mouseX, -180, 180);
 
 		transform.LookAt(Target);
 
 		Target.rotation = Quaternion.Euler(mouseY, mouseX, 0);
-		Player.rotation = Quaternion.Euler(0, mouseX, 0);
+		//Player.rotation = Quaternion.Euler(0, mouseX, 0);
 	}
 }
