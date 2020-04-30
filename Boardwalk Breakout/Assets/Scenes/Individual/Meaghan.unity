@@ -274,13 +274,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 53944264}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc7841a18ff193842aeee46396588211, type: 3}
+  m_Script: {fileID: 11500000, guid: f1385513a004a4c268b8cbdb2416f902, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numPlushReq: 1
-  speed: 5
-  objectPulled: {fileID: 8218822}
-  backward: 1
+  numPlushReq: 3
+  speed: 8
+  objectPushed: {fileID: 8218822}
+  forward: 1
+  backward: 0
   left: 0
   right: 0
 --- !u!65 &53944267
@@ -667,7 +668,7 @@ GameObject:
   - component: {fileID: 788390236}
   m_Layer: 0
   m_Name: Plushie (1)
-  m_TagString: Player
+  m_TagString: Plushie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -773,7 +774,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 1
   m_Speed: 20
-  m_Acceleration: 5
+  m_Acceleration: 30
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
@@ -1001,7 +1002,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 1
   m_Speed: 20
-  m_Acceleration: 5
+  m_Acceleration: 30
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
@@ -1139,7 +1140,7 @@ GameObject:
   - component: {fileID: 1077231156}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Plushie
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1536,7 +1537,7 @@ GameObject:
   - component: {fileID: 1369491934}
   m_Layer: 0
   m_Name: Plushie
-  m_TagString: Player
+  m_TagString: Plushie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1642,7 +1643,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 1
   m_Speed: 20
-  m_Acceleration: 5
+  m_Acceleration: 30
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
@@ -1753,13 +1754,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1559296403}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalRotation: {x: 0.7954917, y: -0, z: -0, w: 0.6059645}
+  m_LocalPosition: {x: 0, y: 40.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 105.403, y: -0.000015258789, z: -0.000015258789}
 --- !u!1 &2064222687
 GameObject:
   m_ObjectHideFlags: 0

@@ -26,6 +26,7 @@ public class FollowCommand : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+    
         if (!doingTask())
             Follow();
         else
