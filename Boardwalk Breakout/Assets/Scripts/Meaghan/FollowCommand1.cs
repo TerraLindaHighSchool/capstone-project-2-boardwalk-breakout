@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class FollowCommand : MonoBehaviour
+public class FollowCommand1 : MonoBehaviour
 {
     public bool goWait { get; private set; }
     public bool goPush { get; private set; }
@@ -23,19 +23,17 @@ public class FollowCommand : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GetComponent<NavMeshAgent>().stoppingDistance = offset;
+        GetComponent<NavMeshAgent>().SetDestination(player.transform.position);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!doingTask())
+        if (!doingTask(0) || Input.GetKeyDown(KeyCode.Tab)) //FOLLOW
             Follow();
-        else
-        {
-            GetComponent<NavMeshAgent>().stoppingDistance = 0;
-            GetComponent<NavMeshAgent>().SetDestination(targetObj.transform.position);
-        }
-
+        else if (Input.GetKeyDown("1"))
+                doingTask(1);
     }
 
     private void Follow()
@@ -45,32 +43,26 @@ public class FollowCommand : MonoBehaviour
         GetComponent<NavMeshAgent>().SetDestination(player.transform.position);
     }
 
-    private bool doingTask()
+    private bool doingTask(int key) //0 if doing nothing
     {
-        if (Input.GetKey(KeyCode.Tab)) //FOLLOW
+        switch(key)
         {
-            return setAllTasksFalse();
+            case 1:
+                setAllTasksFalse();
+                GetComponent<NavMeshAgent>().stoppingDistance = 0;
+                GetComponent<NavMeshAgent>().SetDestination(targetObj.transform.position);
+                return goPush = true;
         }
-        if (Input.GetKey("1")) //PUSH
-        {
-            setAllTasksFalse();
-            return goPush = true;
-        }
-        if (Input.GetKey("2")) //CARRY
-        {
-            setAllTasksFalse();
-            return goCarry = true;
-        }
+        
         return false;
     }
 
-    private bool setAllTasksFalse()
+    private void setAllTasksFalse()
     {
         goWait = false;
         goPush = false;
         goPull = false;
         goStack = false;
         goCarry = false;
-        return false;
     }
 }

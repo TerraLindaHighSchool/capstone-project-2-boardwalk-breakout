@@ -12,12 +12,9 @@ public class Carry : MonoBehaviour
     private Rigidbody plushieRB;
     private GameObject firstPlushie;
 
-    public bool moving { get; private set; }
-
     private void Start()
     {
         carryRB = objectCarried.GetComponent<Rigidbody>();
-        moving = true;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -30,11 +27,14 @@ public class Carry : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        plushies.Remove(other.gameObject);
-        if (plushies.Count == 0)
+        if (other.gameObject.tag.Equals("Plushie"))
         {
-            firstPlushie = null;
-            plushieRB = null;
+            plushies.Remove(other.gameObject);
+            if (plushies.Count == 0)
+            {
+                firstPlushie = null;
+                plushieRB = null;
+            }
         }
     }
 
@@ -45,14 +45,12 @@ public class Carry : MonoBehaviour
         {
             firstPlushie = plushies[0];
             plushieRB = firstPlushie.GetComponent<Rigidbody>();
-            carryRB.position = plushieRB.position + new Vector3(0, firstPlushie.transform.lossyScale.y * 1.5f, 0);
+            carryRB.position = plushieRB.position + new Vector3(0, plushieRB.transform.lossyScale.y * 1.5f, 0);
             objectCarried.transform.parent = firstPlushie.transform;
-            moving = false;
         }
         else
         {
             objectCarried.transform.parent = null;
-            moving = false;
         }
     }
 }
