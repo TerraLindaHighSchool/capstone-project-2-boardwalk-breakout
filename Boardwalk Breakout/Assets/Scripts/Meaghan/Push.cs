@@ -8,6 +8,8 @@ public class Push : MonoBehaviour
     public float speed = 3;
     public GameObject objectPushed;
 
+    private List<GameObject> plushies = new List<GameObject>();
+
     [Header("Direction")]
     [SerializeField]
     bool forward;
@@ -18,33 +20,27 @@ public class Push : MonoBehaviour
     [SerializeField]
     bool right;
 
-
-    private int numPlush;
-
     private void Start()
     {
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Plushie")
+        if (other.tag == "Plushie" && other.GetComponent<FollowCommand>().goPush)
         {
-            numPlush++;
+            plushies.Add(other.gameObject);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Plushie")
-        {
-            numPlush--;
-        }
+            plushies.Remove(other.gameObject);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(numPlush >= numPlushReq)
+        if(plushies.Count >= numPlushReq)
         {
             //z axis (blue)
             if(forward)

@@ -10,6 +10,8 @@ public class FollowCommand : MonoBehaviour
     public bool goPull { get; private set; }
     public bool goStack { get; private set; }
     public bool goCarry { get; private set; }
+    
+
 
     [SerializeField] private float offset = 2.0f;
     public GameObject player;
@@ -26,12 +28,11 @@ public class FollowCommand : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-    
         if (!doingTask())
             Follow();
         else
         {
-            GetComponent<NavMeshAgent>().stoppingDistance = 1;
+            GetComponent<NavMeshAgent>().stoppingDistance = 0;
             GetComponent<NavMeshAgent>().SetDestination(targetObj.transform.position);
         }
 
@@ -45,14 +46,19 @@ public class FollowCommand : MonoBehaviour
 
     private bool doingTask()
     {
-        if (Input.GetKey(KeyCode.Tab))
+        if (Input.GetKey(KeyCode.Tab)) //FOLLOW
         {
             return setAllTasksFalse();
         }
-        if (Input.GetKey("1"))
+        if (Input.GetKey("1")) //PUSH
         {
             setAllTasksFalse();
             return goPush = true;
+        }
+        if (Input.GetKey("2")) //CARRY
+        {
+            setAllTasksFalse();
+            return goCarry = true;
         }
         return false;
     }
