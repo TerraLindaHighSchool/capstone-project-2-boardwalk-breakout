@@ -7,7 +7,8 @@ public class Push : MonoBehaviour
     public int numPlushReq;
     public float speed = 8;
     public GameObject objectPushed;
-    public GameObject stopPoint; //empty gameobject MUST HAVE COLLIDER THAT INTERECTS W DESIRED DIRECTION
+    public GameObject stopPoint; //empty gameobject MUST HAVE TRIGGER COLLIDER THAT INTERECTS W DESIRED DIRECTION
+                                 //reccomended to copy/paste transforms of objectPushed then move
 
     private bool stopped;
     private List<GameObject> plushies = new List<GameObject>();
