@@ -5,12 +5,15 @@ using UnityEngine;
 public class Push : MonoBehaviour
 {
     public int numPlushReq;
-    public float speed = 3;
+    public float speed = 8;
     public GameObject objectPushed;
+    public GameObject stopPoint; //empty gameobject MUST HAVE TRIGGER COLLIDER THAT INTERECTS W DESIRED DIRECTION
+                                 //reccomended to copy/paste transforms of objectPushed then move
 
+    private bool stopped;
     private List<GameObject> plushies = new List<GameObject>();
 
-    [Header("Direction")]
+    [Header("Direction")] 
     [SerializeField]
     bool forward;
     [SerializeField]
@@ -30,17 +33,20 @@ public class Push : MonoBehaviour
         {
             plushies.Add(other.gameObject);
         }
+        else if (other.gameObject == stopPoint)
+            stopped = true;
     }
 
     private void OnTriggerExit(Collider other)
     {
+        if (other.gameObject.tag.Equals("Plushie"))
             plushies.Remove(other.gameObject);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(plushies.Count >= numPlushReq)
+        if(plushies.Count >= numPlushReq && !stopped)
         {
             //z axis (blue)
             if(forward)

@@ -40,36 +40,37 @@ public class FollowCommand : MonoBehaviour
 
     private void Follow()
     {
+        setAllTasksFalse();
         GetComponent<NavMeshAgent>().stoppingDistance = offset;
         GetComponent<NavMeshAgent>().SetDestination(player.transform.position);
     }
 
     private bool doingTask()
     {
-        if (Input.GetKey(KeyCode.Tab)) //FOLLOW
-        {
-            return setAllTasksFalse();
-        }
-        if (Input.GetKey("1")) //PUSH
+        if (Input.GetKey(KeyCode.Tab))
         {
             setAllTasksFalse();
-            return goPush = true;
         }
-        if (Input.GetKey("2")) //CARRY
+        if (Input.GetKey(KeyCode.Alpha1) || Input.GetKey(KeyCode.Keypad1))
         {
             setAllTasksFalse();
-            return goCarry = true;
+            goPush = true;
         }
-        return false;
+        if (Input.GetKey(KeyCode.Alpha2) || Input.GetKey(KeyCode.Keypad2))
+        {
+            setAllTasksFalse();
+            goCarry = true;
+        }
+
+        return (goPush || goCarry);
     }
 
-    private bool setAllTasksFalse()
+    public void setAllTasksFalse()
     {
         goWait = false;
         goPush = false;
         goPull = false;
         goStack = false;
         goCarry = false;
-        return false;
     }
 }
