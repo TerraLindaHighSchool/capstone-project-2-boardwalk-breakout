@@ -12,6 +12,8 @@ public class Carry : MonoBehaviour
     private Rigidbody carryRB;
     private Rigidbody plushieRB;
     private GameObject firstPlushie;
+    private bool carrying;
+    private bool dropped;
 
     private void Start()
     {
@@ -20,17 +22,22 @@ public class Carry : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Plushie" && other.GetComponent<FollowCommand>().goCarry)
-        {
+        if (other.tag == "Plushie" && other.GetComponent<FollowCommand>().goCarry && !carrying)
             plushies.Add(other.gameObject);
+
+        if (other.tag == "Ground" && dropped)
+        {
+            objectCarried.transform.rotation = Quaternion.identity;
+            objectCarried.transform.position = new Vector3(objectCarried.transform.position.x, objectCarried.transform.lossyScale.y / 2, objectCarried.transform.position.z);
+            objectCarried.GetComponent<Rigidbody>().isKinematic = true;
+            dropped = false;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag.Equals("Plushie"))
-        {
-            plushies.Remove(other.gameObject);
+        if (other.gameObject.tag.Equals("Plushie") && !carrying)
+        {            plushies.Remove(other.gameObject);
             if (plushies.Count == 0)
             {
                 firstPlushie = null;
@@ -48,23 +55,28 @@ public class Carry : MonoBehaviour
             for (int i = 0; i <= plushies.Count - 1; i++)
             {
                 plushies[i].GetComponent<FollowCommand>().setAllTasksFalse();
+                plushies[i].transform.SetParent(null);
+                plushies[i].GetComponent<NavMeshAgent>().enabled = true;
                 plushies.RemoveAt(i);
             }
-            objectCarried.transform.parent = null;
-            objectCarried.GetComponent<Rigidbody>().isKinematic = true;
+            objectCarried.transform.SetParent(null);
+            carrying = false;
+            dropped = true;
         }
-        else if (plushies.Count >= numPlushReq)
+        else if (plushies.Count >= numPlushReq && !carrying)
         {
             firstPlushie = plushies[0];
             plushieRB = firstPlushie.GetComponent<Rigidbody>();
-            carryRB.position = plushieRB.position + new Vector3(0, firstPlushie.transform.lossyScale.y * 1.5f, 0);
-            objectCarried.transform.parent = firstPlushie.transform;
+            objectCarried.transform.position = plushieRB.position + new Vector3(0, firstPlushie.transform.lossyScale.y * 1.5f, 0);
+            objectCarried.transform.SetParent(plushieRB.transform);
+            objectCarried.GetComponent<Rigidbody>().isKinematic = false;
             firstPlushie.GetComponent<FollowCommand>().setAllTasksFalse();
-            for (int i = 1; i <= plushies.Count; i++)
+            for (int i = 1; i <= plushies.Count - 1; i++)
             {
-                plushies[i].GetComponent<NavMeshAgent>().stoppingDistance = 3f;
-                plushies[i].GetComponent<NavMeshAgent>().SetDestination(firstPlushie.transform.position);
+                plushies[i].transform.SetParent(firstPlushie.transform);
+                plushies[i].GetComponent<NavMeshAgent>().enabled = false;
             }
+            carrying = true;
         }
     }
 }
