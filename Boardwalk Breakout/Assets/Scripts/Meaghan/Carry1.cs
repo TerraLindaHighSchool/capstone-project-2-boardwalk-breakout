@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Carry : MonoBehaviour
+public class Carry1 : MonoBehaviour
 {
     public int numPlushReq;
     public GameObject objectCarried;
@@ -67,7 +67,7 @@ public class Carry : MonoBehaviour
         {
             firstPlushie = plushies[0];
             plushieRB = firstPlushie.GetComponent<Rigidbody>();
-            objectCarried.transform.position = plushieRB.position + new Vector3(0, firstPlushie.transform.lossyScale.y * 1.5f, 0);
+            objectCarried.transform.position = plushieRB.position + new Vector3(0, firstPlushie.transform.lossyScale.y * 2.2f, 0);
             objectCarried.transform.SetParent(plushieRB.transform);
             firstPlushie.GetComponent<FollowCommand>().setAllTasksFalse();
             for (int i = 1; i <= plushies.Count - 1; i++)
