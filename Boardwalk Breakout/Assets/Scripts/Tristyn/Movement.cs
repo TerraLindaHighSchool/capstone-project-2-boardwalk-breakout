@@ -33,6 +33,18 @@ public class Movement : MonoBehaviour
             isGrounded = false;
     }
 
+    void FixedUpdate()
+    {
+        //Animation
+        if (Input.GetKey("w") || Input.GetKey("s"))
+        {
+            anim.SetBool("isWalking", true);
+        }
+        else
+        {
+            anim.SetBool("isWalking", false);
+        }
+    }
 
     void Update()
     {
@@ -56,15 +68,7 @@ public class Movement : MonoBehaviour
             this.transform.Rotate(Vector3.up, -rotationSpeed * Time.deltaTime);
         }*/
 
-        //Animation
-        if (Input.GetKey("w") || Input.GetKey("s"))
-        {
-            anim.SetBool("isWalking", true);
-        }
-        else
-        {
-            anim.SetBool("isWalking", false);
-        }
+       
 
     }
 }
