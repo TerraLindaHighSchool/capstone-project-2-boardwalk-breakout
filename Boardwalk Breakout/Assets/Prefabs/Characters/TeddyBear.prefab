@@ -1457,8 +1457,7 @@ GameObject:
   - component: {fileID: 95146531450689790}
   - component: {fileID: 54677595783888128}
   - component: {fileID: 136408716658991122}
-  - component: {fileID: 7564234175330592808}
-  - component: {fileID: 5730769899309468405}
+  - component: {fileID: 7057972165736089072}
   m_Layer: 0
   m_Name: TeddyBear
   m_TagString: Untagged
@@ -1533,7 +1532,7 @@ CapsuleCollider:
   m_Height: 1.18
   m_Direction: 1
   m_Center: {x: 0, y: 0.59, z: 0}
---- !u!114 &7564234175330592808
+--- !u!114 &7057972165736089072
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1542,23 +1541,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1764479545794142}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: edff385fa18c541429c5dfd4bf9f1f0a, type: 3}
+  m_Script: {fileID: 11500000, guid: 2a6922b8561d94a6b835e3d4b610efb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 40
+  speed: 20
   rotationSpeed: 70
---- !u!114 &5730769899309468405
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1764479545794142}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 301ce853edf8249e2a0280b2bddb3a26, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1805819037246098
 GameObject:
   m_ObjectHideFlags: 0
