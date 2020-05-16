@@ -51,12 +51,12 @@ public class FollowCommand : MonoBehaviour
         {
             setAllTasksFalse();
         }
-        if (Input.GetKey(KeyCode.Alpha1) || Input.GetKey(KeyCode.Keypad1))
+        if ((Input.GetKey(KeyCode.Alpha1) || Input.GetKey(KeyCode.Keypad1)))
         {
             setAllTasksFalse();
             goPush = true;
         }
-        if (Input.GetKey(KeyCode.Alpha2) || Input.GetKey(KeyCode.Keypad2))
+        if ((Input.GetKey(KeyCode.Alpha2) || Input.GetKey(KeyCode.Keypad2)))
         {
             setAllTasksFalse();
             goCarry = true;
