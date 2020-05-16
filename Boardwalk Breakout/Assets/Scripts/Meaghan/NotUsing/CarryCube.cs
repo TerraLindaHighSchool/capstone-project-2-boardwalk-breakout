@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Carry1 : MonoBehaviour
+public class CarryCube : MonoBehaviour
 {
     public int numPlushReq;
     public GameObject objectCarried;
@@ -56,7 +56,6 @@ public class Carry1 : MonoBehaviour
             {
                 plushies[i].GetComponent<FollowCommand>().setAllTasksFalse();
                 plushies[i].transform.SetParent(null);
-                plushies[i].GetComponent<Rigidbody>().isKinematic = false;
                 plushies[i].GetComponent<NavMeshAgent>().enabled = true;
                 plushies.RemoveAt(i);
             }
@@ -68,16 +67,14 @@ public class Carry1 : MonoBehaviour
         {
             firstPlushie = plushies[0];
             plushieRB = firstPlushie.GetComponent<Rigidbody>();
+            objectCarried.transform.position = plushieRB.position + new Vector3(0, firstPlushie.transform.lossyScale.y * 1.5f, 0);
+            objectCarried.transform.SetParent(plushieRB.transform);
+            firstPlushie.GetComponent<FollowCommand>().setAllTasksFalse();
             for (int i = 1; i <= plushies.Count - 1; i++)
             {
-                plushies[i].GetComponent<Rigidbody>().isKinematic = true;
                 plushies[i].transform.SetParent(firstPlushie.transform);
                 plushies[i].GetComponent<NavMeshAgent>().enabled = false;
             }
-            objectCarried.transform.position = plushieRB.position + new Vector3(0, firstPlushie.transform.lossyScale.y * 2.3f, 0);
-            objectCarried.transform.SetParent(plushieRB.transform);
-            firstPlushie.GetComponent<FollowCommand>().setAllTasksFalse();
-            
             carrying = true;
         }
     }

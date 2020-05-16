@@ -15,13 +15,13 @@ public class Push : MonoBehaviour
 
     [Header("Direction")] 
     [SerializeField]
-    bool forward;
+    public bool forward;
     [SerializeField]
-    bool backward;
+    public bool backward;
     [SerializeField]
-    bool left;
+    public bool left;
     [SerializeField]
-    bool right;
+    public bool right;
 
     private void Start()
     {
@@ -33,7 +33,7 @@ public class Push : MonoBehaviour
         {
             plushies.Add(other.gameObject);
         }
-        else if (other.gameObject == stopPoint)
+        else if (other.tag == "Stop")
             stopped = true;
     }
 
@@ -59,5 +59,13 @@ public class Push : MonoBehaviour
             if (left)
                 objectPushed.transform.position -= transform.right * Time.deltaTime * speed;
         }
+    }
+
+    public void setAllDirectionsFalse()
+    {
+        forward = false;
+        backward = false;
+        left = false;
+        right = false;
     }
 }
