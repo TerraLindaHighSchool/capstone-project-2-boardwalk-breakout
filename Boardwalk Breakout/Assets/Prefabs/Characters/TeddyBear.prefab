@@ -26,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1011063770772826}
-  m_LocalRotation: {x: -0.027381184, y: 0.9986014, z: 0.04521862, w: 0.0008993322}
+  m_LocalRotation: {x: -0.027381185, y: 0.99860144, z: 0.045218624, w: 0.0008993323}
   m_LocalPosition: {x: 0.00000015258789, y: 0.00000016361878, z: 0.108106226}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1457,7 +1457,8 @@ GameObject:
   - component: {fileID: 95146531450689790}
   - component: {fileID: 54677595783888128}
   - component: {fileID: 136408716658991122}
-  - component: {fileID: 7057972165736089072}
+  - component: {fileID: 5456964502275328894}
+  - component: {fileID: 3358359832679623388}
   m_Layer: 0
   m_Name: TeddyBear
   m_TagString: Untagged
@@ -1493,7 +1494,7 @@ Animator:
   m_GameObject: {fileID: 1764479545794142}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 0e8915349da353f4d8bc41bdc089faad, type: 3}
-  m_Controller: {fileID: 9100000, guid: 26ff47c5542293a448b714389eabdbed, type: 2}
+  m_Controller: {fileID: 9100000, guid: 643dd18464f1644e9af112dc2e37a114, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1532,7 +1533,7 @@ CapsuleCollider:
   m_Height: 1.18
   m_Direction: 1
   m_Center: {x: 0, y: 0.59, z: 0}
---- !u!114 &7057972165736089072
+--- !u!114 &5456964502275328894
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1541,11 +1542,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 1764479545794142}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a6922b8561d94a6b835e3d4b610efb5, type: 3}
+  m_Script: {fileID: 11500000, guid: bda683dd78cbc42988c87d7301ae8e57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
-  rotationSpeed: 70
+--- !u!143 &3358359832679623388
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1764479545794142}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 1.5
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!1 &1805819037246098
 GameObject:
   m_ObjectHideFlags: 0
@@ -1744,7 +1761,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1866945995344760}
-  m_LocalRotation: {x: 0.045088444, y: -0.0035533716, z: -0.07100227, w: 0.99645025}
+  m_LocalRotation: {x: 0.045088448, y: -0.0035533719, z: -0.071002275, w: 0.9964503}
   m_LocalPosition: {x: -0.11599896, y: -0.0000000023841857, z: 0.000000009536743}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2024,7 +2041,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1924724375691180}
-  m_LocalRotation: {x: -0.009254432, y: 0.46283653, z: -0.037709646, w: 0.8855928}
+  m_LocalRotation: {x: -0.009254433, y: 0.46283656, z: -0.03770965, w: 0.8855929}
   m_LocalPosition: {x: -0.249459, y: 0.039481148, z: 0.17596155}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
