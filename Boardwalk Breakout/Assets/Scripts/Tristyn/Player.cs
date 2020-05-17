@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     float rotSpeed = 80;
     //float rot = 0f;
     float gravity = 8;
+    float jumpHeight = 6f;
 
     Vector3 moveDir = Vector3.zero;
 
@@ -22,7 +23,7 @@ public class Player : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if (controller.isGrounded)
         {
@@ -34,6 +35,7 @@ public class Player : MonoBehaviour
                 moveDir *= speed;
                 moveDir = transform.TransformDirection(moveDir);
             }
+
             if (Input.GetKeyUp(KeyCode.W))
             {
                 anim.SetInteger("condition", 0);
@@ -61,6 +63,24 @@ public class Player : MonoBehaviour
             {
                 this.transform.Rotate(Vector3.up, -rotSpeed * Time.deltaTime);
             }
+
+            //Jump
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                anim.SetBool("isJumping", true);
+                Debug.Log(anim.GetBool("isJumping"));
+                moveDir = new Vector3(0, jumpHeight, 0);
+            }else
+            {
+                anim.SetBool("isJumping", false);
+            }
+
+           /* if (Input.GetKeyUp(KeyCode.Space))
+            {
+                anim.SetBool("isJumping", false);
+                Debug.Log(anim.GetBool("isJumping"));
+                //moveDir = new Vector3(0, 0, 0);
+            }*/
         }
         //rot += Input.GetAxis("Horizontal") * rotSpeed * Time.deltaTime;
         //transform.eulerAngles = new Vector3(0, rot, 0);
@@ -68,4 +88,20 @@ public class Player : MonoBehaviour
         moveDir.y -= gravity * Time.deltaTime;
         controller.Move(moveDir * Time.deltaTime);
     }
+    /*
+     * public bool isGrounded = false;
+    void Update()
+    {
+        jump();
+    }
+    void jump()
+    {
+        if (Input.GetButtonDown("Jump") && isGrounded == true)
+        {
+            gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, 5f), ForceMode2D.Impulse);
+        }
+    }
+     *
+     * 
+     */
 }
