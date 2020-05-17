@@ -7,21 +7,19 @@ public class Push : MonoBehaviour
     public int numPlushReq;
     public float speed = 8;
     public GameObject objectPushed;
-    public GameObject stopPoint; //empty gameobject MUST HAVE TRIGGER COLLIDER THAT INTERECTS W DESIRED DIRECTION
-                                 //reccomended to copy/paste transforms of objectPushed then move
 
     private bool stopped;
     private List<GameObject> plushies = new List<GameObject>();
 
     [Header("Direction")] 
     [SerializeField]
-    bool forward;
+    public bool forward;
     [SerializeField]
-    bool backward;
+    public bool backward;
     [SerializeField]
-    bool left;
+    public bool left;
     [SerializeField]
-    bool right;
+    public bool right;
 
     private void Start()
     {
@@ -33,7 +31,7 @@ public class Push : MonoBehaviour
         {
             plushies.Add(other.gameObject);
         }
-        else if (other.gameObject == stopPoint)
+        else if (other.tag == "Stop")
             stopped = true;
     }
 
@@ -59,5 +57,13 @@ public class Push : MonoBehaviour
             if (left)
                 objectPushed.transform.position -= transform.right * Time.deltaTime * speed;
         }
+    }
+
+    public void setAllDirectionsFalse()
+    {
+        forward = false;
+        backward = false;
+        left = false;
+        right = false;
     }
 }

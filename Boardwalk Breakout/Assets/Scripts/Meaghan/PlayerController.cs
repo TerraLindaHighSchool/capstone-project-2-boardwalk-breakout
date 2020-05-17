@@ -10,21 +10,24 @@ public class PlayerController : MonoBehaviour
     bool isGrounded;
     Rigidbody rb;
 
-
-
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-
+        FollowCommand.player = gameObject;
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.tag.Equals("Ground"))
             isGrounded = true;
+        else if (interactable(collision.gameObject))
+        {
+            FollowCommand.targetObj = collision.gameObject;
+            FollowCommand.hasTarget = true;
+        }
     }
 
-    private void OnCollisionExit(Collision collision)
+    private void OnTriggerExit(Collider collision)
     {
         if (collision.gameObject.tag.Equals("Ground"))
             isGrounded = false;
@@ -54,9 +57,17 @@ public class PlayerController : MonoBehaviour
             this.transform.Rotate(Vector3.up, -rotationSpeed * Time.deltaTime);
         }
 
-
-
+        
     }
+
+    bool interactable(GameObject obj)
+        {
+            if (obj.GetComponent<Push>() != null)
+                return true;
+            if (obj.GetComponent<Carry>() != null)
+                return true;
+            return false;
+        }
 }
 
 
