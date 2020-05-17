@@ -10,21 +10,22 @@ public class FollowCommand : MonoBehaviour
     public bool goPull { get; private set; }
     public bool goStack { get; private set; }
     public bool goCarry { get; private set; }
+
     
+    public static GameObject targetObj { get; set; }
+    public static GameObject player { get; set; }
+    public static bool hasTarget { get; set; }
 
 
     [SerializeField] private float offset = 2.0f;
-    public GameObject player;
-    private NavMeshAgent navMeshAgent;
+    private NavMeshAgent nav;
 
     //****temporary object to replace selection****
-    public GameObject targetObj;
-
-    // Start is called before the first frame update
-    void Start()
+    
+    private void Start()
     {
+        nav = GetComponent<NavMeshAgent>();
     }
-
     // Update is called once per frame
     void Update()
     {
@@ -32,17 +33,16 @@ public class FollowCommand : MonoBehaviour
             Follow();
         else
         {
-            GetComponent<NavMeshAgent>().stoppingDistance = 0;
-            GetComponent<NavMeshAgent>().SetDestination(targetObj.transform.position);
+            nav.stoppingDistance = 0;
+            nav.SetDestination(targetObj.transform.position);
         }
 
     }
 
     private void Follow()
     {
-        setAllTasksFalse();
-        GetComponent<NavMeshAgent>().stoppingDistance = offset;
-        GetComponent<NavMeshAgent>().SetDestination(player.transform.position);
+        nav.stoppingDistance = offset;
+        nav.SetDestination(player.transform.position);
     }
 
     private bool doingTask()
@@ -51,12 +51,12 @@ public class FollowCommand : MonoBehaviour
         {
             setAllTasksFalse();
         }
-        if ((Input.GetKey(KeyCode.Alpha1) || Input.GetKey(KeyCode.Keypad1)))
+        if ((Input.GetKey(KeyCode.Alpha1) || Input.GetKey(KeyCode.Keypad1)) && hasTarget)
         {
             setAllTasksFalse();
             goPush = true;
         }
-        if ((Input.GetKey(KeyCode.Alpha2) || Input.GetKey(KeyCode.Keypad2)))
+        if ((Input.GetKey(KeyCode.Alpha2) || Input.GetKey(KeyCode.Keypad2)) && hasTarget)
         {
             setAllTasksFalse();
             goCarry = true;
