@@ -20,20 +20,25 @@ public class FollowCommand : MonoBehaviour
     [SerializeField] private float offset = 2.0f;
     private NavMeshAgent nav;
 
+    Animator anim;
+
     //****temporary object to replace selection****
-    
+
     private void Start()
     {
         nav = GetComponent<NavMeshAgent>();
+        anim = GetComponent<Animator>();
     }
     // Update is called once per frame
     void Update()
     {
-        if (!doingTask())
+        if (!doingTask()) { 
             Follow();
-        else
+        anim.SetBool("isWalking", false);
+        }else
         {
             nav.stoppingDistance = 0;
+            anim.SetBool("isWalking", true);
             nav.SetDestination(targetObj.transform.position);
         }
 
@@ -56,6 +61,7 @@ public class FollowCommand : MonoBehaviour
             setAllTasksFalse();
             goPush = true;
         }
+
         if ((Input.GetKey(KeyCode.Alpha2) || Input.GetKey(KeyCode.Keypad2)) && hasTarget)
         {
             setAllTasksFalse();

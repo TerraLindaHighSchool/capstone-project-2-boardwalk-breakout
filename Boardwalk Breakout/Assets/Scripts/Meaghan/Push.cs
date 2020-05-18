@@ -21,10 +21,6 @@ public class Push : MonoBehaviour
     [SerializeField]
     public bool right;
 
-    private void Start()
-    {
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Plushie" && other.GetComponent<FollowCommand>().goPush)
