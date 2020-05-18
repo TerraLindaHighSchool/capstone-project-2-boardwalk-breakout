@@ -18,6 +18,7 @@ public class Carry : MonoBehaviour
     private void Start()
     {
         carryRB = objectCarried.GetComponent<Rigidbody>();
+        
     }
 
     private void OnTriggerEnter(Collider other)
