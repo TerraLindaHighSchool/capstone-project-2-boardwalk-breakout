@@ -2,27 +2,48 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class FinalPlayerController : MonoBehaviour
 {
+    bool isGrounded;
+    Rigidbody rb;
+
     float speed = 4;
     float rotSpeed = 80;
     //float rot = 0f;
     float gravity = 8;
-    float jumpHeight = 3.5f;
+    float jumpHeight = 6f;
 
     Vector3 moveDir = Vector3.zero;
 
     CharacterController controller;
     Animator anim;
 
-    // Start is called before the first frame update
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
+        FollowCommand.player = gameObject;
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
+    void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.tag.Equals("Ground"))
+            isGrounded = true;
+        else if (interactable(collision.gameObject))
+        {
+            FollowCommand.targetObj = collision.gameObject;
+            FollowCommand.hasTarget = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider collision)
+    {
+        if (collision.gameObject.tag.Equals("Ground"))
+            isGrounded = false;
+    }
+    
+
     void Update()
     {
         if (controller.isGrounded)
@@ -30,7 +51,6 @@ public class Player : MonoBehaviour
             if (Input.GetKey(KeyCode.W))
             {
                 anim.SetInteger("condition", 1);
-                Debug.Log(anim.GetInteger("condition"));
                 moveDir = new Vector3(0, 0, 1);
                 moveDir *= speed;
                 moveDir = transform.TransformDirection(moveDir);
@@ -70,38 +90,25 @@ public class Player : MonoBehaviour
                 anim.SetBool("isJumping", true);
                 Debug.Log(anim.GetBool("isJumping"));
                 moveDir = new Vector3(0, jumpHeight, 0);
-            }else
+            }
+            else
             {
                 anim.SetBool("isJumping", false);
             }
-
-           /* if (Input.GetKeyUp(KeyCode.Space))
-            {
-                anim.SetBool("isJumping", false);
-                Debug.Log(anim.GetBool("isJumping"));
-                //moveDir = new Vector3(0, 0, 0);
-            }*/
         }
-        //rot += Input.GetAxis("Horizontal") * rotSpeed * Time.deltaTime;
-        //transform.eulerAngles = new Vector3(0, rot, 0);
 
         moveDir.y -= gravity * Time.deltaTime;
         controller.Move(moveDir * Time.deltaTime);
+
     }
-    /*
-     * public bool isGrounded = false;
-    void Update()
+
+    bool interactable(GameObject obj)
     {
-        jump();
+        if (obj.GetComponent<Push>() != null)
+            return true;
+        if (obj.GetComponent<Carry>() != null)
+            return true;
+        return false;
     }
-    void jump()
-    {
-        if (Input.GetButtonDown("Jump") && isGrounded == true)
-        {
-            gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, 5f), ForceMode2D.Impulse);
-        }
-    }
-     *
-     * 
-     */
+  
 }
