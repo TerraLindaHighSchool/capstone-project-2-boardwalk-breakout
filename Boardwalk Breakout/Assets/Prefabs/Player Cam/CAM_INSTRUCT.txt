@@ -1,3 +1,0 @@
-1. Drag Player Cam into Hierarchy.
-2. Main Camera > Inspector > Add Component > CinemachineBrain
-3. Player Cam > CinemachineVirtualCamera (red symbol) > drag Player object into Follow and Look At
