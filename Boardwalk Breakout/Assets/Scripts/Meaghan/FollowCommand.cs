@@ -32,10 +32,12 @@ public class FollowCommand : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!doingTask()) { 
+        if (!doingTask())
+        { 
             Follow();
-        anim.SetBool("isWalking", false);
-        }else
+            anim.SetBool("isWalking", true);
+        }
+        else
         {
             nav.stoppingDistance = 0;
             anim.SetBool("isWalking", true);
@@ -55,17 +57,22 @@ public class FollowCommand : MonoBehaviour
         if (Input.GetKey(KeyCode.Tab))
         {
             setAllTasksFalse();
+            targetObj = null;
+            hasTarget = false;
         }
-        if ((Input.GetKey(KeyCode.Alpha1) || Input.GetKey(KeyCode.Keypad1)) && hasTarget)
+        else if (hasTarget)
         {
-            setAllTasksFalse();
-            goPush = true;
-        }
+            if ((Input.GetKey(KeyCode.Alpha1) || Input.GetKey(KeyCode.Keypad1)))
+            {
+                setAllTasksFalse();
+                goPush = true;
+            }
 
-        if ((Input.GetKey(KeyCode.Alpha2) || Input.GetKey(KeyCode.Keypad2)) && hasTarget)
-        {
-            setAllTasksFalse();
-            goCarry = true;
+            if ((Input.GetKey(KeyCode.Alpha2) || Input.GetKey(KeyCode.Keypad2)))
+            {
+                setAllTasksFalse();
+                goCarry = true;
+            }
         }
 
         return (goPush || goCarry);

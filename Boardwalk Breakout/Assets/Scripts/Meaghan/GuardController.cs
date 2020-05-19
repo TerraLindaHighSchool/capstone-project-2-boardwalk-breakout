@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class WaypointPatrol : MonoBehaviour
+public class GuardController : MonoBehaviour
 {
     public NavMeshAgent navMeshAgent;
     public Transform[] waypoints;
@@ -12,6 +12,7 @@ public class WaypointPatrol : MonoBehaviour
 
     void Start()
     {
+        navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshAgent.SetDestination(waypoints[0].position);
     }
 
@@ -21,6 +22,14 @@ public class WaypointPatrol : MonoBehaviour
         {
             m_CurrentWaypointIndex = (m_CurrentWaypointIndex + 1) % waypoints.Length;
             navMeshAgent.SetDestination(waypoints[m_CurrentWaypointIndex].position);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "plushie" || other.tag == "player")
+        {
+           // Destroy();
         }
     }
 }
