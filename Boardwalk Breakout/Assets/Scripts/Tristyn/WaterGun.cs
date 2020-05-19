@@ -5,30 +5,38 @@ using UnityEngine;
 public class WaterGun : MonoBehaviour
 {
 
-    public ParticleSystem particleLauncher;
+    //public ParticleSystem particleLauncher;
+
+    void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.tag.Equals("Player"))
+        {
+            Debug.Log("YAY");
+        }
+
+    }
+
+
+
+
+
+
+
+
 
     /*void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.tag == "Player")
         {
-            
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                particleLauncher.Play();
-            }
-
-            if (Input.GetKeyUp(KeyCode.E))
-            {
-                particleLauncher.Stop();
-            }
+            Debug.Log("COLLISION");
         }
     }*/
-    
 
 
 
 
 
+    /*
 
     // Update is called once per frame
      void Update()
@@ -42,8 +50,8 @@ public class WaterGun : MonoBehaviour
          {
              particleLauncher.Stop();
          }
-     }
-     
+     }*/
+
 
 
 }
