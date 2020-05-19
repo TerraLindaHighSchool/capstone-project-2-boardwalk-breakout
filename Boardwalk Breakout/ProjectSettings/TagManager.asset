@@ -8,6 +8,7 @@ TagManager:
   - Plushie
   - Ground
   - Stop
+  - WaterGun
   layers:
   - Default
   - TransparentFX
