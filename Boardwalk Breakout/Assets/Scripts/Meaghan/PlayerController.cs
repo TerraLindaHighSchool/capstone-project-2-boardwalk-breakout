@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         FollowCommand.player = gameObject;
+        GrabPlushie.player = gameObject;
     }
 
     void OnTriggerEnter(Collider collision)
