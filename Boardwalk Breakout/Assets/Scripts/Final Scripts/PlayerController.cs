@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour
     CharacterController controller;
     Animator anim;
 
+    private GameObject[] plushies;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -37,6 +39,15 @@ public class PlayerController : MonoBehaviour
             FollowCommand.targetObj = collision.gameObject;
             FollowCommand.hasTarget = true;
         }
+
+        /*if (collision.gameObject.tag.Equals("Plushie"))
+        {
+            plushies = GameObject.FindGameObjectsWithTag("Plushie");
+            foreach (GameObject p in plushies)
+            {
+                p.transform.position = new Vector3(0, 0, 0);
+            }
+        }*/
     }
 
     private void OnTriggerExit(Collider collision)
