@@ -161,6 +161,7 @@ GameObject:
   - component: {fileID: 1226409553626747685}
   - component: {fileID: 2478522582624916237}
   - component: {fileID: 4584205394699925971}
+  - component: {fileID: 3241120681181960572}
   m_Layer: 0
   m_Name: Main Player
   m_TagString: Player
@@ -281,6 +282,19 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
+--- !u!65 &3241120681181960572
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4582441536168667047}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 16.280983, y: 1, z: 12.8367195}
+  m_Center: {x: -2.9193954, y: 0, z: -0.71393394}
 --- !u!1 &4582442061867850149
 GameObject:
   m_ObjectHideFlags: 0
@@ -2381,8 +2395,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8522374730688669127}
-  m_LocalRotation: {x: 0.110509865, y: -0, z: -0, w: 0.993875}
-  m_LocalPosition: {x: -13.445358, y: 1.7, z: -7.189591}
+  m_LocalRotation: {x: 0.11050985, y: -0, z: -0, w: 0.993875}
+  m_LocalPosition: {x: 0, y: 1.7, z: -7.5499997}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4579609051482720963}

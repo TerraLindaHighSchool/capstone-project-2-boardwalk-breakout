@@ -21,6 +21,9 @@ public class FollowCommand : MonoBehaviour
     private NavMeshAgent nav;
 
     Animator anim;
+    public Animator playeranim;
+
+    
 
     //****temporary object to replace selection****
 
@@ -33,14 +36,12 @@ public class FollowCommand : MonoBehaviour
     void Update()
     {
         if (!doingTask())
-        { 
+        {
             Follow();
-            anim.SetBool("isWalking", true);
         }
         else
         {
             nav.stoppingDistance = 0;
-            anim.SetBool("isWalking", true);
             nav.SetDestination(targetObj.transform.position);
         }
 
@@ -50,8 +51,18 @@ public class FollowCommand : MonoBehaviour
     {
         nav.stoppingDistance = offset;
         nav.SetDestination(player.transform.position);
+        if (playeranim.GetCurrentAnimatorStateInfo(0).IsName("idle1"))
+        {
+            
+            anim.SetBool("isWalking", false);   
+        }
+        else
+        {
+            anim.SetBool("isWalking", true);
+        }
     }
 
+ 
     private bool doingTask()
     {
         if (Input.GetKey(KeyCode.Tab))
