@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FinalPlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     bool isGrounded;
+    bool isMoving;
     Rigidbody rb;
 
-    float speed = 4;
+    float speed = 10;
     float rotSpeed = 80;
     //float rot = 0f;
     float gravity = 8;
-    float jumpHeight = 6f;
+    float jumpHeight = 3f;
 
     Vector3 moveDir = Vector3.zero;
 
@@ -24,6 +25,7 @@ public class FinalPlayerController : MonoBehaviour
         FollowCommand.player = gameObject;
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
+        isGrounded = true;
     }
 
     void OnTriggerEnter(Collider collision)
@@ -42,7 +44,7 @@ public class FinalPlayerController : MonoBehaviour
         if (collision.gameObject.tag.Equals("Ground"))
             isGrounded = false;
     }
-    
+
 
     void Update()
     {
@@ -54,12 +56,7 @@ public class FinalPlayerController : MonoBehaviour
                 moveDir = new Vector3(0, 0, 1);
                 moveDir *= speed;
                 moveDir = transform.TransformDirection(moveDir);
-            }
-
-            if (Input.GetKeyUp(KeyCode.W))
-            {
-                anim.SetInteger("condition", 0);
-                moveDir = new Vector3(0, 0, 0);
+                isMoving = true;
             }
 
             if (Input.GetKey(KeyCode.S))
@@ -67,39 +64,52 @@ public class FinalPlayerController : MonoBehaviour
                 anim.SetBool("walkBackwards", true);
                 moveDir = new Vector3(0, 0, -1);
                 moveDir *= speed;
-            }
-
-            if (Input.GetKeyUp(KeyCode.S))
-            {
-                anim.SetBool("walkBackwards", false);
-                moveDir = new Vector3(0, 0, 0);
-            }
-
-            if (Input.GetKey("d"))
-            {
-                this.transform.Rotate(Vector3.up, rotSpeed * Time.deltaTime);
-            }
-            if (Input.GetKey("a"))
-            {
-                this.transform.Rotate(Vector3.up, -rotSpeed * Time.deltaTime);
+                moveDir = transform.TransformDirection(moveDir);
+                isMoving = true;
             }
 
             //Jump
             if (Input.GetKeyDown(KeyCode.Space))
             {
+                anim.SetInteger("condition", 0);
+                anim.SetBool("walkBackwards", false);
                 anim.SetBool("isJumping", true);
                 Debug.Log(anim.GetBool("isJumping"));
-                moveDir = new Vector3(0, jumpHeight, 0);
+                if(isMoving)
+                    moveDir += new Vector3(0, jumpHeight, 0);
+                else
+                    moveDir = new Vector3(0, jumpHeight, 0);
             }
             else
             {
                 anim.SetBool("isJumping", false);
             }
+
+            isMoving = false;
         }
 
+        if (Input.GetKeyUp(KeyCode.W))
+        {
+            anim.SetInteger("condition", 0);
+            moveDir = new Vector3(0, 0, 0);
+        }
+        if (Input.GetKeyUp(KeyCode.S))
+        {
+            anim.SetBool("walkBackwards", false);
+            moveDir = new Vector3(0, 0, 0);
+        }
+
+        if (Input.GetKey("d"))
+        {
+            this.transform.Rotate(Vector3.up, rotSpeed * Time.deltaTime);
+        }
+        if (Input.GetKey("a"))
+        {
+            this.transform.Rotate(Vector3.up, -rotSpeed * Time.deltaTime);
+        }
+        
         moveDir.y -= gravity * Time.deltaTime;
         controller.Move(moveDir * Time.deltaTime);
-
     }
 
     bool interactable(GameObject obj)
