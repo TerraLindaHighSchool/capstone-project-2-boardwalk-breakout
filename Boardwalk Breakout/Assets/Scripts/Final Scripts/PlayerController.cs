@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     bool isGrounded;
+    bool isMoving;
     Rigidbody rb;
 
     float speed = 10;
@@ -24,6 +25,7 @@ public class PlayerController : MonoBehaviour
         FollowCommand.player = gameObject;
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
+        isGrounded = true;
     }
 
     void OnTriggerEnter(Collider collision)
@@ -54,6 +56,7 @@ public class PlayerController : MonoBehaviour
                 moveDir = new Vector3(0, 0, 1);
                 moveDir *= speed;
                 moveDir = transform.TransformDirection(moveDir);
+                isMoving = true;
             }
 
             if (Input.GetKey(KeyCode.S))
@@ -62,6 +65,7 @@ public class PlayerController : MonoBehaviour
                 moveDir = new Vector3(0, 0, -1);
                 moveDir *= speed;
                 moveDir = transform.TransformDirection(moveDir);
+                isMoving = true;
             }
 
             //Jump
@@ -71,12 +75,17 @@ public class PlayerController : MonoBehaviour
                 anim.SetBool("walkBackwards", false);
                 anim.SetBool("isJumping", true);
                 Debug.Log(anim.GetBool("isJumping"));
-                moveDir += new Vector3(0, jumpHeight, 0);
+                if(isMoving)
+                    moveDir += new Vector3(0, jumpHeight, 0);
+                else
+                    moveDir = new Vector3(0, jumpHeight, 0);
             }
             else
             {
                 anim.SetBool("isJumping", false);
             }
+
+            isMoving = false;
         }
 
         if (Input.GetKeyUp(KeyCode.W))
