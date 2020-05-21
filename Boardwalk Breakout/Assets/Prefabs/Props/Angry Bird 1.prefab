@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1919696358909513309
+--- !u!1 &1393597636897190478
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,9 +8,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6972154028755956498}
-  - component: {fileID: 6743591800722013816}
-  - component: {fileID: 2192738042421954449}
+  - component: {fileID: 7579906882286096129}
+  - component: {fileID: 6081303171122627179}
+  - component: {fileID: 1701524626019384194}
   m_Layer: 0
   m_Name: Toy_2016__corona:Toy30
   m_TagString: Untagged
@@ -18,35 +18,35 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6972154028755956498
+--- !u!4 &7579906882286096129
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1919696358909513309}
+  m_GameObject: {fileID: 1393597636897190478}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.0016779585, y: 0.04428992, z: 0.008793688}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 290698772121385498}
+  m_Father: {fileID: 1007655120048145929}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &6743591800722013816
+--- !u!33 &6081303171122627179
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1919696358909513309}
+  m_GameObject: {fileID: 1393597636897190478}
   m_Mesh: {fileID: 1926785570568837052, guid: 414124da74f95ad4c928b2913132d466, type: 3}
---- !u!23 &2192738042421954449
+--- !u!23 &1701524626019384194
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1919696358909513309}
+  m_GameObject: {fileID: 1393597636897190478}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -89,7 +89,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!1 &3626414915112732681
+--- !u!1 &4296628824516604954
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -97,40 +97,26 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 290698772121385498}
-  - component: {fileID: 7351386300292386632}
+  - component: {fileID: 1007655120048145929}
   m_Layer: 0
-  m_Name: Angry Bird
+  m_Name: Angry Bird 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &290698772121385498
+--- !u!4 &1007655120048145929
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3626414915112732681}
+  m_GameObject: {fileID: 4296628824516604954}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 20, y: 20, z: 20}
+  m_LocalPosition: {x: 47.094, y: -6.204405e-17, z: -1.588}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
-  - {fileID: 6972154028755956498}
+  - {fileID: 7579906882286096129}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &7351386300292386632
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3626414915112732681}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.01758505
-  m_Center: {x: -0.0019040093, y: 0.04432031, z: 0.009579348}
