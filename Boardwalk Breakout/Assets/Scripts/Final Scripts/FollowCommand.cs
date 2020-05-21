@@ -5,13 +5,12 @@ using UnityEngine.AI;
 
 public class FollowCommand : MonoBehaviour
 {
-    public bool goWait { get; private set; }
     public bool goPush { get; private set; }
     public bool goPull { get; private set; }
     public bool goStack { get; private set; }
     public bool goCarry { get; private set; }
 
-    
+
     public static GameObject targetObj { get; set; }
     public static GameObject player { get; set; }
     public static bool hasTarget { get; set; }
@@ -20,25 +19,24 @@ public class FollowCommand : MonoBehaviour
     [SerializeField] private float offset = 2.0f;
     private NavMeshAgent nav;
 
-    Animator anim;
-    public Animator playeranim;
+    //Animator anim;
+    //public Animator playeranim;
 
-    
+
 
     //****temporary object to replace selection****
 
     private void Start()
     {
         nav = GetComponent<NavMeshAgent>();
-        anim = GetComponent<Animator>();
+        //anim = GetComponent<Animator>();
     }
+
     // Update is called once per frame
     void Update()
     {
         if (!doingTask())
-        {
             Follow();
-        }
         else
         {
             nav.stoppingDistance = 0;
@@ -51,36 +49,43 @@ public class FollowCommand : MonoBehaviour
     {
         nav.stoppingDistance = offset;
         nav.SetDestination(player.transform.position);
-        if (playeranim.GetCurrentAnimatorStateInfo(0).IsName("idle1"))
+        /*if (playeranim.GetCurrentAnimatorStateInfo(0).IsName("idle1"))
         {
-            
-            anim.SetBool("isWalking", false);   
+
+            anim.SetBool("isWalking", false);
         }
         else
         {
             anim.SetBool("isWalking", true);
-        }
+        }*/
     }
 
- 
+
     private bool doingTask()
     {
         if (Input.GetKey(KeyCode.Tab))
         {
+            nav.isStopped = false;
             setAllTasksFalse();
             targetObj = null;
             hasTarget = false;
+        }
+        else if ((Input.GetKey(KeyCode.Alpha3) || Input.GetKey(KeyCode.Keypad3)))
+        {
+                return nav.isStopped = false;
         }
         else if (hasTarget)
         {
             if ((Input.GetKey(KeyCode.Alpha1) || Input.GetKey(KeyCode.Keypad1)))
             {
+                nav.isStopped = false;
                 setAllTasksFalse();
                 goPush = true;
             }
 
             if ((Input.GetKey(KeyCode.Alpha2) || Input.GetKey(KeyCode.Keypad2)))
             {
+                nav.isStopped = false;
                 setAllTasksFalse();
                 goCarry = true;
             }
@@ -91,7 +96,6 @@ public class FollowCommand : MonoBehaviour
 
     public void setAllTasksFalse()
     {
-        goWait = false;
         goPush = false;
         goPull = false;
         goStack = false;
