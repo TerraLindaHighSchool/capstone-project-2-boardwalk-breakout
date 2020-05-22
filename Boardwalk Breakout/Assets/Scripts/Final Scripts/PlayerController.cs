@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
         isGrounded = true;
     }
 
-    void OnTriggerEnter(Collider collision)
+    private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag.Equals("Ground"))
             isGrounded = true;
@@ -39,23 +39,25 @@ public class PlayerController : MonoBehaviour
             FollowCommand.targetObj = collision.gameObject;
             FollowCommand.hasTarget = true;
         }
-
-        /*if (collision.gameObject.tag.Equals("Plushie"))
-        {
-            plushies = GameObject.FindGameObjectsWithTag("Plushie");
-            foreach (GameObject p in plushies)
-            {
-                p.transform.position = new Vector3(0, 0, 0);
-            }
-        }*/
     }
 
-    private void OnTriggerExit(Collider collision)
+    private void OnCollisionExit(Collision collision)
     {
         if (collision.gameObject.tag.Equals("Ground"))
             isGrounded = false;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Plushie" && !other.gameObject.GetComponent<FollowCommand>().doingTask() == true)
+            other.gameObject.GetComponent<FollowCommand>().playerWait = true;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Plushie")
+            other.gameObject.GetComponent<FollowCommand>().playerWait = false;
+    }
 
     void Update()
     {
@@ -86,7 +88,7 @@ public class PlayerController : MonoBehaviour
                 anim.SetBool("walkBackwards", false);
                 anim.SetBool("isJumping", true);
                 Debug.Log(anim.GetBool("isJumping"));
-                if(isMoving)
+                if (isMoving)
                     moveDir += new Vector3(0, jumpHeight, 0);
                 else
                     moveDir = new Vector3(0, jumpHeight, 0);
@@ -118,7 +120,7 @@ public class PlayerController : MonoBehaviour
         {
             this.transform.Rotate(Vector3.up, -rotSpeed * Time.deltaTime);
         }
-        
+
         moveDir.y -= gravity * Time.deltaTime;
         controller.Move(moveDir * Time.deltaTime);
     }
@@ -131,5 +133,5 @@ public class PlayerController : MonoBehaviour
             return true;
         return false;
     }
-  
+
 }

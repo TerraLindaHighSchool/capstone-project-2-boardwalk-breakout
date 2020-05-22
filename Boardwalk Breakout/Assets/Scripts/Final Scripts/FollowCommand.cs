@@ -9,6 +9,8 @@ public class FollowCommand : MonoBehaviour
     public bool goPull { get; private set; }
     public bool goStack { get; private set; }
     public bool goCarry { get; private set; }
+    public bool goWait { get; private set; }
+    public bool playerWait { get; set; }
 
 
     public static GameObject targetObj { get; set; }
@@ -16,10 +18,9 @@ public class FollowCommand : MonoBehaviour
     public static bool hasTarget { get; set; }
 
 
-    [SerializeField] private float offset = 2.0f;
+    [SerializeField] private float offset = 10.0f;
     private NavMeshAgent nav;
-
-    Animator anim;
+    private Animator anim;
 
 
 
@@ -29,7 +30,7 @@ public class FollowCommand : MonoBehaviour
     private void Start()
     {
         nav = GetComponent<NavMeshAgent>();
-        anim = GetComponent<Animator>();  
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -37,60 +38,67 @@ public class FollowCommand : MonoBehaviour
     {
         if (!doingTask())
         {
-            Follow();
-
+            if (goWait || playerWait)
+                Wait();
+            else
+                Follow();
         }
         else
         {
-
             nav.stoppingDistance = 0;
             nav.SetDestination(targetObj.transform.position);
-
         }
-     
     }
 
     private void Follow()
     {
+        nav.isStopped = false;
+        anim.SetBool("isWalking", true);
         nav.stoppingDistance = offset;
         nav.SetDestination(player.transform.position);
     }
 
-
-    private bool doingTask()
+    private void Wait()
     {
-        if (Input.GetKey(KeyCode.Tab))
+        nav.velocity = Vector3.zero;
+        nav.isStopped = true;
+        anim.SetBool("isWalking", false);
+    }
+
+
+    public bool doingTask()
+    {
+        if (Input.GetKey(KeyCode.Tab)) //FOLLOW
         {
-            nav.isStopped = false;
             setAllTasksFalse();
             targetObj = null;
-            hasTarget = false;
-            anim.SetBool("isWalking", false);
+            return hasTarget = false;
         }
-        else if ((Input.GetKey(KeyCode.Alpha3) || Input.GetKey(KeyCode.Keypad3)))
+        else if ((Input.GetKey(KeyCode.Alpha3) || Input.GetKey(KeyCode.Keypad3))) //WAIT
         {
-                anim.SetBool("isWalking", true);
-                return nav.isStopped = false;
+            nav.isStopped = true;
+            goWait = true;
+            return false;
         }
-        else if (hasTarget)
+        else if (hasTarget) //does not do action unless player has touched an object
         {
-            anim.SetBool("isWalking", true);
-            if ((Input.GetKey(KeyCode.Alpha1) || Input.GetKey(KeyCode.Keypad1)))
+            if ((Input.GetKey(KeyCode.Alpha1) || Input.GetKey(KeyCode.Keypad1))) //PUSH
             {
-                nav.isStopped = false;
+                anim.SetBool("isWalking", true);
                 setAllTasksFalse();
                 goPush = true;
             }
 
-            if ((Input.GetKey(KeyCode.Alpha2) || Input.GetKey(KeyCode.Keypad2)))
+            if ((Input.GetKey(KeyCode.Alpha2) || Input.GetKey(KeyCode.Keypad2))) //CARRY
             {
+                anim.SetBool("isWalking", true);
                 nav.isStopped = false;
                 setAllTasksFalse();
                 goCarry = true;
             }
         }
 
-        return (goPush || goCarry);
+        return (goPush || goCarry); //only two conditions where doingTask is true
     }
 
     public void setAllTasksFalse()
@@ -99,5 +107,8 @@ public class FollowCommand : MonoBehaviour
         goPull = false;
         goStack = false;
         goCarry = false;
+        goWait = false;
     }
 }
+
+
