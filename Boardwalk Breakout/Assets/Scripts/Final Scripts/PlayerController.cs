@@ -6,7 +6,6 @@ public class PlayerController : MonoBehaviour
 {
     bool isGrounded;
     bool isMoving;
-    Rigidbody rb;
 
     float speed = 10;
     float rotSpeed = 80;
@@ -23,7 +22,6 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
         FollowCommand.player = gameObject;
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
@@ -51,6 +49,11 @@ public class PlayerController : MonoBehaviour
     {
         if (other.tag == "Plushie" && !other.gameObject.GetComponent<FollowCommand>().doingTask() == true)
             other.gameObject.GetComponent<FollowCommand>().playerWait = true;
+        else if (interactable(other.gameObject))
+        {
+            FollowCommand.targetObj = other.gameObject;
+            FollowCommand.hasTarget = true;
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -88,7 +91,7 @@ public class PlayerController : MonoBehaviour
                 anim.SetBool("walkBackwards", false);
                 anim.SetBool("isJumping", true);
                 Debug.Log(anim.GetBool("isJumping"));
-                if (isMoving)
+                if(isMoving)
                     moveDir += new Vector3(0, jumpHeight, 0);
                 else
                     moveDir = new Vector3(0, jumpHeight, 0);
@@ -120,7 +123,7 @@ public class PlayerController : MonoBehaviour
         {
             this.transform.Rotate(Vector3.up, -rotSpeed * Time.deltaTime);
         }
-
+        
         moveDir.y -= gravity * Time.deltaTime;
         controller.Move(moveDir * Time.deltaTime);
     }
@@ -133,5 +136,5 @@ public class PlayerController : MonoBehaviour
             return true;
         return false;
     }
-
+  
 }

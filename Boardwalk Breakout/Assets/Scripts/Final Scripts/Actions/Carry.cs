@@ -6,8 +6,8 @@ using UnityEngine.AI;
 public class Carry : MonoBehaviour
 {
     public int numPlushReq;
-    public GameObject objectCarried;
 
+    private GameObject objectCarried;
     private List<GameObject> plushies = new List<GameObject>();
     private Rigidbody carryRB;
     private Rigidbody plushieRB;
@@ -17,6 +17,7 @@ public class Carry : MonoBehaviour
 
     private void Start()
     {
+        objectCarried = transform.parent.gameObject;
         carryRB = objectCarried.GetComponent<Rigidbody>();
         
     }
@@ -76,9 +77,8 @@ public class Carry : MonoBehaviour
             }
             objectCarried.transform.position = plushieRB.position + new Vector3(0, firstPlushie.transform.lossyScale.y * 2.3f, 0);
             objectCarried.transform.SetParent(plushieRB.transform);
-            if(!carrying)
-                firstPlushie.GetComponent<FollowCommand>().setAllTasksFalse();
-            
+            firstPlushie.GetComponent<FollowCommand>().setAllTasksFalse();
+
             carrying = true;
         }
     }

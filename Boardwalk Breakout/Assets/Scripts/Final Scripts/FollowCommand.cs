@@ -18,7 +18,6 @@ public class FollowCommand : MonoBehaviour
     public static bool hasTarget { get; set; }
 
 
-    [SerializeField] private float offset = 10.0f;
     private NavMeshAgent nav;
     private Animator anim;
 
@@ -45,7 +44,6 @@ public class FollowCommand : MonoBehaviour
         }
         else
         {
-            nav.stoppingDistance = 0;
             nav.SetDestination(targetObj.transform.position);
         }
     }
@@ -54,7 +52,6 @@ public class FollowCommand : MonoBehaviour
     {
         nav.isStopped = false;
         anim.SetBool("isWalking", true);
-        nav.stoppingDistance = offset;
         nav.SetDestination(player.transform.position);
     }
 
