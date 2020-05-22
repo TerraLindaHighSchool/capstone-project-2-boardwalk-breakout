@@ -6,7 +6,6 @@ public class PlayerController : MonoBehaviour
 {
     bool isGrounded;
     bool isMoving;
-    Rigidbody rb;
 
     float speed = 10;
     float rotSpeed = 80;
@@ -23,14 +22,13 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
         FollowCommand.player = gameObject;
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
         isGrounded = true;
     }
 
-    void OnTriggerEnter(Collider collision)
+    private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag.Equals("Ground"))
             isGrounded = true;
@@ -39,23 +37,30 @@ public class PlayerController : MonoBehaviour
             FollowCommand.targetObj = collision.gameObject;
             FollowCommand.hasTarget = true;
         }
-
-        /*if (collision.gameObject.tag.Equals("Plushie"))
-        {
-            plushies = GameObject.FindGameObjectsWithTag("Plushie");
-            foreach (GameObject p in plushies)
-            {
-                p.transform.position = new Vector3(0, 0, 0);
-            }
-        }*/
     }
 
-    private void OnTriggerExit(Collider collision)
+    private void OnCollisionExit(Collision collision)
     {
         if (collision.gameObject.tag.Equals("Ground"))
             isGrounded = false;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Plushie" && !other.gameObject.GetComponent<FollowCommand>().doingTask() == true)
+            other.gameObject.GetComponent<FollowCommand>().playerWait = true;
+        else if (interactable(other.gameObject))
+        {
+            FollowCommand.targetObj = other.gameObject;
+            FollowCommand.hasTarget = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Plushie")
+            other.gameObject.GetComponent<FollowCommand>().playerWait = false;
+    }
 
     void Update()
     {
