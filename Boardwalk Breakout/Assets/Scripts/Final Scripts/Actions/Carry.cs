@@ -6,8 +6,8 @@ using UnityEngine.AI;
 public class Carry : MonoBehaviour
 {
     public int numPlushReq;
-    public GameObject objectCarried;
 
+    private GameObject objectCarried;
     private List<GameObject> plushies = new List<GameObject>();
     private Rigidbody carryRB;
     private Rigidbody plushieRB;
@@ -17,6 +17,7 @@ public class Carry : MonoBehaviour
 
     private void Start()
     {
+        objectCarried = transform.parent.gameObject;
         carryRB = objectCarried.GetComponent<Rigidbody>();
         
     }
@@ -50,12 +51,11 @@ public class Carry : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.Tab))
         {
             objectCarried.GetComponent<Rigidbody>().isKinematic = false;
             for (int i = 0; i <= plushies.Count - 1; i++)
             {
-                plushies[i].GetComponent<FollowCommand>().setAllTasksFalse();
                 plushies[i].transform.SetParent(null);
                 plushies[i].GetComponent<Rigidbody>().isKinematic = false;
                 plushies[i].GetComponent<NavMeshAgent>().enabled = true;
@@ -65,7 +65,7 @@ public class Carry : MonoBehaviour
             carrying = false;
             dropped = true;
         }
-        else if (plushies.Count >= numPlushReq && !carrying)
+        if (plushies.Count >= numPlushReq && !carrying)
         {
             firstPlushie = plushies[0];
             plushieRB = firstPlushie.GetComponent<Rigidbody>();
@@ -78,7 +78,7 @@ public class Carry : MonoBehaviour
             objectCarried.transform.position = plushieRB.position + new Vector3(0, firstPlushie.transform.lossyScale.y * 2.3f, 0);
             objectCarried.transform.SetParent(plushieRB.transform);
             firstPlushie.GetComponent<FollowCommand>().setAllTasksFalse();
-            
+
             carrying = true;
         }
     }

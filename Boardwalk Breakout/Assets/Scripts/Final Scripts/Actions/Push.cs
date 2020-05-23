@@ -6,11 +6,11 @@ public class Push : MonoBehaviour
 {
     public int numPlushReq;
     public float speed = 8;
-    public GameObject objectPushed;
 
     private bool stopped;
     private List<GameObject> plushies = new List<GameObject>();
 
+    private GameObject objectPushed;
     [Header("Direction")] 
     [SerializeField]
     public bool forward;
@@ -20,6 +20,11 @@ public class Push : MonoBehaviour
     public bool left;
     [SerializeField]
     public bool right;
+
+    private void Start()
+    {
+        objectPushed = transform.parent.gameObject;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
