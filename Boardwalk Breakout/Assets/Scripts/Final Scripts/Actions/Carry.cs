@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Threading;
 using UnityEngine.AI;
 
 public class Carry : MonoBehaviour
@@ -12,7 +13,7 @@ public class Carry : MonoBehaviour
     private Rigidbody plushieRB;
     private GameObject firstPlushie;
     private bool carrying;
-    private bool dropped;
+    //private bool dropped;
 
     private void Start()
     {
@@ -29,13 +30,12 @@ public class Carry : MonoBehaviour
                // firstPlushie = other.gameObject;
         }
 
-        if (other.tag == "Ground" && dropped)
+        /*if (other.tag == "Ground" && dropped)
         {
             transform.rotation = Quaternion.identity;
-            transform.position = new Vector3(transform.position.x, transform.lossyScale.y / 2, transform.position.z);
             GetComponent<Rigidbody>().isKinematic = true;
             dropped = false;
-        }
+        }*/
     }
 
     private void OnTriggerExit(Collider other)
@@ -54,19 +54,7 @@ public class Carry : MonoBehaviour
     void Update()
     {
         if (Input.GetKey(KeyCode.Tab))
-        {
-            GetComponent<Rigidbody>().isKinematic = false;
-            for (int i = 0; i <= plushies.Count - 1; i++)
-            {
-                plushies[i].transform.SetParent(null);
-                plushies[i].GetComponent<Rigidbody>().isKinematic = false;
-                plushies[i].GetComponent<NavMeshAgent>().enabled = true;
-                plushies.RemoveAt(i);
-            }
-            transform.SetParent(null);
-            carrying = false;
-            dropped = true;
-        }
+            stopCarry();
         if (carrying)
         {
             for (int i = 1; i <= plushies.Count - 1; i++)
@@ -79,7 +67,6 @@ public class Carry : MonoBehaviour
             plushieRB = firstPlushie.GetComponent<Rigidbody>();
             for (int i = 1; i <= plushies.Count - 1; i++)
             {
-                plushies[i].GetComponent<Rigidbody>().isKinematic = true;
                 plushies[i].transform.SetParent(firstPlushie.transform);
                 plushies[i].GetComponent<NavMeshAgent>().enabled = false;
                 plushies[i].GetComponent<FollowCommand>().setAllTasksFalse();
@@ -91,5 +78,20 @@ public class Carry : MonoBehaviour
 
             carrying = true;
         }
+    }
+
+    public void stopCarry()
+    {
+        GetComponent<Rigidbody>().isKinematic = false;
+        for (int i = 0; i <= plushies.Count - 1; i++)
+        {
+            plushies[i].GetComponent<FollowCommand>().setAllTasksFalse();
+            plushies[i].transform.SetParent(null);
+            plushies[i].GetComponent<NavMeshAgent>().enabled = true;
+            plushies.RemoveAt(i);
+        }
+        transform.SetParent(null);
+        carrying = false;
+        //dropped = true;
     }
 }
