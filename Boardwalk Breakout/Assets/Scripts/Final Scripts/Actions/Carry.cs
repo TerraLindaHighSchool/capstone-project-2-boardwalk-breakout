@@ -15,14 +15,28 @@ public class Carry : MonoBehaviour
     private bool carrying;
     //private bool dropped;
 
+    public GameObject warningUI;
+
     private void Start()
     {
         carryRB = GetComponent<Rigidbody>();
-        
+       
     }
 
     private void OnTriggerEnter(Collider other)
     {
+
+        if((other.tag == "Player") && (plushies.Count < numPlushReq))
+        {
+            warningUI.SetActive(true);
+        }
+        /*if(plushies.Count < numPlushReq)
+        {   
+            warningUI.SetActive(true);
+            
+            
+        }*/
+
         if ((other.tag == "Plushie" && other.GetComponent<FollowCommand>().goCarry /*|| (other.tag == "Player" && !other.isTrigger))*/ && !carrying))
         {
             plushies.Add(other.gameObject);
@@ -47,6 +61,11 @@ public class Carry : MonoBehaviour
                 firstPlushie = null;
                 plushieRB = null;
             }
+        }
+
+        if ((other.tag == "Player") && (plushies.Count < numPlushReq))
+        {
+            warningUI.SetActive(false);
         }
     }
 
@@ -80,6 +99,9 @@ public class Carry : MonoBehaviour
 
             carrying = true;
         }
+
+        
+        
     }
 
     public void stopCarry()

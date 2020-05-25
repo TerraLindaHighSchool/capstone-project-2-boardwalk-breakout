@@ -22,14 +22,13 @@ public class FollowCommand : MonoBehaviour
     private Animator anim;
 
 
-
-
     //****temporary object to replace selection****
 
     private void Start()
     {
         nav = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
+       
     }
 
     // Update is called once per frame
@@ -48,7 +47,7 @@ public class FollowCommand : MonoBehaviour
         }
     }
 
-    private void Follow()
+    public void Follow()
     {
         nav.isStopped = false;
         anim.SetBool("isWalking", true);
