@@ -34,11 +34,6 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag.Equals("Ground"))
             isGrounded = true;
-        else if (interactable(collision.gameObject))
-        {
-            FollowCommand.targetObj = collision.gameObject;
-            FollowCommand.hasTarget = true;
-        }
     }
 
     private void OnCollisionExit(Collision collision)
@@ -49,8 +44,18 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Plushie" && !other.gameObject.GetComponent<FollowCommand>().doingTask() == true)
-            other.gameObject.GetComponent<FollowCommand>().playerWait = true;
+        if (other.tag == "Plushie")
+        {
+            if (!other.gameObject.GetComponent<FollowCommand>().enabled)
+            {
+                other.gameObject.GetComponent<FollowCommand>().enabled = true;
+                other.gameObject.GetComponent<FollowCommand>().playerWait = true;
+            }
+
+            else if (!other.gameObject.GetComponent<FollowCommand>().doingTask() == true)
+                other.gameObject.GetComponent<FollowCommand>().playerWait = true;
+        }
+
         else if (interactable(other.gameObject))
         {
             FollowCommand.targetObj = other.gameObject;

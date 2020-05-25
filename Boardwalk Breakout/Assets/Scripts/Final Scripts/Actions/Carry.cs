@@ -6,8 +6,7 @@ using UnityEngine.AI;
 public class Carry : MonoBehaviour
 {
     public int numPlushReq;
-
-    private GameObject objectCarried;
+    
     private List<GameObject> plushies = new List<GameObject>();
     private Rigidbody carryRB;
     private Rigidbody plushieRB;
@@ -17,28 +16,31 @@ public class Carry : MonoBehaviour
 
     private void Start()
     {
-        objectCarried = transform.parent.gameObject;
-        carryRB = objectCarried.GetComponent<Rigidbody>();
+        carryRB = GetComponent<Rigidbody>();
         
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Plushie" && other.GetComponent<FollowCommand>().goCarry && !carrying)
+        if ((other.tag == "Plushie" && other.GetComponent<FollowCommand>().goCarry /*|| (other.tag == "Player" && !other.isTrigger))*/ && !carrying))
+        {
             plushies.Add(other.gameObject);
+            //if (other.tag == "Player" && !other.isTrigger)
+               // firstPlushie = other.gameObject;
+        }
 
         if (other.tag == "Ground" && dropped)
         {
-            objectCarried.transform.rotation = Quaternion.identity;
-            objectCarried.transform.position = new Vector3(objectCarried.transform.position.x, objectCarried.transform.lossyScale.y / 2, objectCarried.transform.position.z);
-            objectCarried.GetComponent<Rigidbody>().isKinematic = true;
+            transform.rotation = Quaternion.identity;
+            transform.position = new Vector3(transform.position.x, transform.lossyScale.y / 2, transform.position.z);
+            GetComponent<Rigidbody>().isKinematic = true;
             dropped = false;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag.Equals("Plushie") && !carrying)
+        if ((other.tag == "Plushie" && other.GetComponent<FollowCommand>().goCarry /*|| (other.tag == "Player" && !other.isTrigger))*/ && !carrying))
         {            plushies.Remove(other.gameObject);
             if (plushies.Count == 0)
             {
@@ -53,7 +55,7 @@ public class Carry : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Tab))
         {
-            objectCarried.GetComponent<Rigidbody>().isKinematic = false;
+            GetComponent<Rigidbody>().isKinematic = false;
             for (int i = 0; i <= plushies.Count - 1; i++)
             {
                 plushies[i].transform.SetParent(null);
@@ -61,22 +63,30 @@ public class Carry : MonoBehaviour
                 plushies[i].GetComponent<NavMeshAgent>().enabled = true;
                 plushies.RemoveAt(i);
             }
-            objectCarried.transform.SetParent(null);
+            transform.SetParent(null);
             carrying = false;
             dropped = true;
         }
-        if (plushies.Count >= numPlushReq && !carrying)
+        if (carrying)
         {
-            firstPlushie = plushies[0];
+            for (int i = 1; i <= plushies.Count - 1; i++)
+                plushies[i].GetComponent<FollowCommand>().playerWait = firstPlushie.GetComponent<FollowCommand>().playerWait; //wait when first plushie waits
+        }
+        else if (plushies.Count >= numPlushReq)
+        {
+            //if(!(firstPlushie.tag == "Player"))
+                firstPlushie = plushies[0];
             plushieRB = firstPlushie.GetComponent<Rigidbody>();
             for (int i = 1; i <= plushies.Count - 1; i++)
             {
                 plushies[i].GetComponent<Rigidbody>().isKinematic = true;
                 plushies[i].transform.SetParent(firstPlushie.transform);
                 plushies[i].GetComponent<NavMeshAgent>().enabled = false;
+                plushies[i].GetComponent<FollowCommand>().setAllTasksFalse();
             }
-            objectCarried.transform.position = plushieRB.position + new Vector3(0, firstPlushie.transform.lossyScale.y * 2.3f, 0);
-            objectCarried.transform.SetParent(plushieRB.transform);
+            transform.position = plushieRB.position + new Vector3(0, firstPlushie.transform.lossyScale.y * 1.2f, 0);
+            transform.rotation = Quaternion.identity;
+            transform.SetParent(plushieRB.transform);
             firstPlushie.GetComponent<FollowCommand>().setAllTasksFalse();
 
             carrying = true;
