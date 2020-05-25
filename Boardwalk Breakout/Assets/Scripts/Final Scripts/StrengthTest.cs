@@ -6,8 +6,10 @@ public class StrengthTest : MonoBehaviour
 {
     
     public GameObject doorHinge;
+    public GameObject[] plushies;
 
     private bool open;
+    bool stoppedCarry;
     private GameObject mallet;
 
     // Update is called once per frame
@@ -15,6 +17,8 @@ public class StrengthTest : MonoBehaviour
     {
         if (open)
             Open();
+        else
+            Stay();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -23,12 +27,23 @@ public class StrengthTest : MonoBehaviour
         {
             open = true;
             mallet = other.gameObject;
+            mallet.GetComponent<Carry>().enabled = false;
         }
     }
 
     private void Open()
     {
-        doorHinge.transform.localRotation = Quaternion.Slerp(doorHinge.transform.localRotation, Quaternion.Euler(0, 90, 0), Time.deltaTime* 2);
-        mallet.GetComponent<Carry>().stopCarry();
+        doorHinge.transform.localRotation = Quaternion.Slerp(doorHinge.transform.localRotation, Quaternion.Euler(0, 90, 0), Time.deltaTime * 2);
+        if (!stoppedCarry)
+        {
+            mallet.GetComponent<Carry>().stopCarry();
+            stoppedCarry = true;
+        }
+    }
+
+    private void Stay()
+    {
+        foreach (GameObject plushie in plushies)
+            plushie.GetComponent<FollowCommand>().enabled = false;
     }
 }
