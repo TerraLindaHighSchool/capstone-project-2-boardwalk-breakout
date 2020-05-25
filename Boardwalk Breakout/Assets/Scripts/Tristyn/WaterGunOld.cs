@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaterGun : MonoBehaviour
+public class WaterGunOld : MonoBehaviour
 {
 
     //public ParticleSystem particleLauncher;

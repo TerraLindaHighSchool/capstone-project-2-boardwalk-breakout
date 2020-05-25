@@ -62,8 +62,10 @@ public class Carry : MonoBehaviour
         }
         else if (plushies.Count >= numPlushReq)
         {
+
+            GetComponent<Rigidbody>().isKinematic = true;
             //if(!(firstPlushie.tag == "Player"))
-                firstPlushie = plushies[0];
+            firstPlushie = plushies[0];
             plushieRB = firstPlushie.GetComponent<Rigidbody>();
             for (int i = 1; i <= plushies.Count - 1; i++)
             {
@@ -82,13 +84,15 @@ public class Carry : MonoBehaviour
 
     public void stopCarry()
     {
+        FollowCommand.hasTarget = false;
+        FollowCommand.targetObj = null;
         GetComponent<Rigidbody>().isKinematic = false;
-        for (int i = 0; i <= plushies.Count - 1; i++)
+        for (int i = plushies.Count-1; i >= 0; i--)
         {
-            plushies[i].GetComponent<FollowCommand>().setAllTasksFalse();
             plushies[i].transform.SetParent(null);
             plushies[i].GetComponent<NavMeshAgent>().enabled = true;
             plushies.RemoveAt(i);
+            plushies[i].GetComponent<FollowCommand>().playerWait = false;
         }
         transform.SetParent(null);
         carrying = false;
