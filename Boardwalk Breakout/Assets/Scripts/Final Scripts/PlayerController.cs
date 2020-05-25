@@ -7,7 +7,9 @@ public class PlayerController : MonoBehaviour
     bool isGrounded;
     bool isMoving;
 
-    float speed = 10;
+
+    //speed originally 10 
+    float speed = 6;
     float rotSpeed = 80;
     //float rot = 0f;
     float gravity = 8;
