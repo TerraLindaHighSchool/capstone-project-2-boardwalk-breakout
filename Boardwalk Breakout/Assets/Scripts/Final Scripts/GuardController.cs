@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class GuardController : MonoBehaviour
 {
-    public NavMeshAgent navMeshAgent;
+    private NavMeshAgent navMeshAgent;
     public Transform[] waypoints;
 
     int m_CurrentWaypointIndex;
@@ -18,7 +18,7 @@ public class GuardController : MonoBehaviour
 
     void Update()
     {
-        if (navMeshAgent.remainingDistance < navMeshAgent.stoppingDistance)
+        if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
         {
             m_CurrentWaypointIndex = (m_CurrentWaypointIndex + 1) % waypoints.Length;
             navMeshAgent.SetDestination(waypoints[m_CurrentWaypointIndex].position);
@@ -27,9 +27,9 @@ public class GuardController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "plushie" || other.tag == "player")
+        if((other.tag == "Plushie" && other.GetComponent<FollowCommand>().enabled) || (other.tag == "Player" && !other.isTrigger))
         {
-           // Destroy();
+            Destroy(other.gameObject);
         }
     }
 }

@@ -16,17 +16,17 @@ public class DirectionChange : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.GetComponent<Push>() != null)
+        if(other.GetComponent<Push>() != null)
         {
-            other.gameObject.GetComponent<Push>().setAllDirectionsFalse();
+            other.GetComponent<Push>().setAllDirectionsFalse();
             if (forward)
-                other.gameObject.GetComponent<Push>().forward = true;
+                other.GetComponent<Push>().forward = true;
             if (backward)
-                other.gameObject.GetComponent<Push>().backward = true;
+                other.GetComponent<Push>().backward = true;
             if (left)
-                other.gameObject.GetComponent<Push>().left = true;
+                other.GetComponent<Push>().left = true;
             if(right)
-                other.gameObject.GetComponent<Push>().right = true;
+                other.GetComponent<Push>().right = true;
         }
     }
 

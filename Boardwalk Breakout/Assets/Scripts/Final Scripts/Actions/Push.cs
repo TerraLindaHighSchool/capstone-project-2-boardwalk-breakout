@@ -10,7 +10,7 @@ public class Push : MonoBehaviour
     private bool stopped;
     private List<GameObject> plushies = new List<GameObject>();
 
-    private GameObject objectPushed;
+    //private GameObject objectPushed;
     [Header("Direction")] 
     [SerializeField]
     public bool forward;
@@ -23,12 +23,12 @@ public class Push : MonoBehaviour
 
     private void Start()
     {
-        objectPushed = transform.parent.gameObject;
+        //objectPushed = transform.parent.gameObject;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Plushie" && other.GetComponent<FollowCommand>().goPush)
+        if ((other.tag == "Player" && !other.isTrigger) || (other.tag == "Plushie" && other.GetComponent<FollowCommand>().goPush))
         {
             plushies.Add(other.gameObject);
         }
@@ -38,7 +38,7 @@ public class Push : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag.Equals("Plushie"))
+        if (other.tag == "Plushie" || (other.tag == "Player" && !other.isTrigger))
             plushies.Remove(other.gameObject);
     }
 
@@ -49,14 +49,14 @@ public class Push : MonoBehaviour
         {
             //z axis (blue)
             if(forward)
-                objectPushed.transform.position += transform.forward * Time.deltaTime * speed;
+                transform.position += transform.forward * Time.deltaTime * speed;
             if (backward)
-                objectPushed.transform.position -= transform.forward * Time.deltaTime * speed;
+                transform.position -= transform.forward * Time.deltaTime * speed;
             //x axis (red)
             if (right)
-                objectPushed.transform.position += transform.right * Time.deltaTime * speed;
+                transform.position += transform.right * Time.deltaTime * speed;
             if (left)
-                objectPushed.transform.position -= transform.right * Time.deltaTime * speed;
+                transform.position -= transform.right * Time.deltaTime * speed;
         }
     }
 

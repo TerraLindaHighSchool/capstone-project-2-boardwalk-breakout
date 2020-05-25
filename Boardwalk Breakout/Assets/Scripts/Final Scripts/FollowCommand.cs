@@ -82,6 +82,7 @@ public class FollowCommand : MonoBehaviour
             if ((Input.GetKey(KeyCode.Alpha1) || Input.GetKey(KeyCode.Keypad1))) //PUSH
             {
                 anim.SetBool("isWalking", true);
+                nav.isStopped = false;
                 setAllTasksFalse();
                 goPush = true;
             }
