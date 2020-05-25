@@ -9,6 +9,7 @@ TagManager:
   - Ground
   - Stop
   - WaterGun
+  - Mallet
   layers:
   - Default
   - TransparentFX

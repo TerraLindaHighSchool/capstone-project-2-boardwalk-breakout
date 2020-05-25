@@ -28,7 +28,7 @@ public class Push : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if ((other.tag == "Player" && !other.isTrigger) || (other.tag == "Plushie" && other.GetComponent<FollowCommand>().goPush))
+        if (other.tag == "Plushie" && other.GetComponent<FollowCommand>().goPush)
         {
             plushies.Add(other.gameObject);
         }
@@ -38,7 +38,7 @@ public class Push : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Plushie" || (other.tag == "Player" && !other.isTrigger))
+        if (other.tag == "Plushie")
             plushies.Remove(other.gameObject);
     }
 
