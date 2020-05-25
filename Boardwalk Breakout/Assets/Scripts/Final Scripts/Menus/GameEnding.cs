@@ -38,7 +38,8 @@ public class GameEnding : MonoBehaviour
 
     public void playAgain()
     {
-        SceneManager.LoadScene(1);
+        Application.LoadLevel(Application.loadedLevel);
+        Time.timeScale = 1f;
     }
 
 }

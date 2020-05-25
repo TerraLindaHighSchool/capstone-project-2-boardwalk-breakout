@@ -9,10 +9,16 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenuUI;
     public GameObject howToPlayUI;
     public GameObject gotItUI;
+    public AudioSource pause;
+    public AudioSource confirm;
+    public AudioSource menuSound;
 
     void Start()
     {
-        gotItUI.SetActive(true);    
+        gotItUI.SetActive(true);
+        pause.GetComponent<AudioSource>();
+        confirm.GetComponent<AudioSource>();
+        menuSound.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -25,7 +31,8 @@ public class PauseMenu : MonoBehaviour
                 Resume();
             }else
             {
-                Pause();
+                pause.Play();
+                Pause(); 
             }
         }
     }
@@ -35,6 +42,7 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         gameIsPaused = false;
+        confirm.Play();
     }
 
     void Pause()
@@ -47,6 +55,7 @@ public class PauseMenu : MonoBehaviour
     public void Quit()
     {
         Time.timeScale = 1f;
+        confirm.Play();
         SceneManager.LoadScene("Menu");
     }
 
@@ -56,12 +65,14 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 0f;
         gameIsPaused = true;
         howToPlayUI.SetActive(true);
+        menuSound.Play();
     }
 
     public void returnToPauseMenu()
     {
         howToPlayUI.SetActive(false);
         Pause();
+        confirm.Play();
     }
 
     public void gotIt()
@@ -69,5 +80,6 @@ public class PauseMenu : MonoBehaviour
         gotItUI.SetActive(false);
         Time.timeScale = 1f;
         gameIsPaused = false;
+        confirm.Play();
     }
 }

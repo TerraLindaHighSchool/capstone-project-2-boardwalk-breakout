@@ -20,7 +20,9 @@ public class PlayerController : MonoBehaviour
     CharacterController controller;
     Animator anim;
 
-    private GameObject[] plushies;
+    public GameObject[] plushies;
+    public int count;
+    
 
     void Start()
     {
@@ -28,12 +30,18 @@ public class PlayerController : MonoBehaviour
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
         isGrounded = true;
+       
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag.Equals("Ground"))
             isGrounded = true;
+
+        /*if (collision.gameObject.tag.Equals("Plushie"))
+        {
+            pAmount++;
+        } */  
     }
 
     private void OnCollisionExit(Collision collision)
@@ -48,12 +56,15 @@ public class PlayerController : MonoBehaviour
         {
             if (!other.gameObject.GetComponent<FollowCommand>().enabled)
             {
+                count++;
                 other.gameObject.GetComponent<FollowCommand>().enabled = true;
                 other.gameObject.GetComponent<FollowCommand>().playerWait = true;
+                
             }
 
             else if (!other.gameObject.GetComponent<FollowCommand>().doingTask() == true)
                 other.gameObject.GetComponent<FollowCommand>().playerWait = true;
+           
         }
 
         else if (interactable(other.gameObject))
@@ -133,6 +144,7 @@ public class PlayerController : MonoBehaviour
         
         moveDir.y -= gravity * Time.deltaTime;
         controller.Move(moveDir * Time.deltaTime);
+
     }
 
     bool interactable(GameObject obj)

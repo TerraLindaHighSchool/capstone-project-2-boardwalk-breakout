@@ -58,6 +58,10 @@ public class Push : MonoBehaviour
             if (left)
                 transform.position -= transform.right * Time.deltaTime * speed;
         }
+        else
+        {
+
+        }
     }
 
     public void setAllDirectionsFalse()
