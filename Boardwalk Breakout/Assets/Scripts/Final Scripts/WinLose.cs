@@ -43,7 +43,7 @@ public class WinLose : MonoBehaviour
 
     private void numberLose()
     {
-        if ((currentEvent != -1 && currentEvent % 1 == 0 && player.GetComponent<PlayerController>().count < events[(int) currentEvent]))
+        if ((!(currentEvent < 0) && player.GetComponent<PlayerController>().count < events[(int) currentEvent]))
             loseUI.SetActive(true);
             //Debug.Log("You let too many plushies get captured, you idiot!");
     }

@@ -39,8 +39,6 @@ public class StrengthTest : MonoBehaviour
         {
             mallet.GetComponent<Carry>().stopCarry();
             stoppedCarry = true;
-            player.GetComponent<PlayerController>().count += plushies.Length;
-            WinLose.currentEvent += plushies[0].GetComponent<FollowCommand>().needsRescue * plushies.Length;
         }
     }
 
