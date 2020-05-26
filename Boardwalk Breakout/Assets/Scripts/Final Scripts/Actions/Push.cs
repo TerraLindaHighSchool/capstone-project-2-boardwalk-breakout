@@ -28,9 +28,12 @@ public class Push : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Plushie" && other.GetComponent<FollowCommand>().goPush)
+        if (other.tag == "Plushie")
         {
-            plushies.Add(other.gameObject);
+            if (other.GetComponent<FollowCommand>().goPush)
+                plushies.Add(other.gameObject);
+            else if (other.GetComponent<FollowCommand>().goCarry)
+                Debug.Log("SET ACTIVE You cannot carry this object, you imbecile. Try something else.");
         }
         else if (other.tag == "Stop")
             stopped = true;
@@ -39,28 +42,33 @@ public class Push : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if (other.tag == "Plushie")
+        {
             plushies.Remove(other.gameObject);
+            Debug.Log("SET INACTIVE You cannot carry this object, you imbecile. Try something else.");
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(plushies.Count >= numPlushReq && !stopped)
+        if (!stopped)
         {
-            //z axis (blue)
-            if(forward)
-                transform.position += transform.forward * Time.deltaTime * speed;
-            if (backward)
-                transform.position -= transform.forward * Time.deltaTime * speed;
-            //x axis (red)
-            if (right)
-                transform.position += transform.right * Time.deltaTime * speed;
-            if (left)
-                transform.position -= transform.right * Time.deltaTime * speed;
-        }
-        else
-        {
-
+            if (plushies.Count >= numPlushReq)
+            {
+                Debug.Log("SET INACTIVE You need more plushies to push this object, you imbecile.");
+                //z axis (blue)
+                if (forward)
+                    transform.position += transform.forward * Time.deltaTime * speed;
+                if (backward)
+                    transform.position -= transform.forward * Time.deltaTime * speed;
+                //x axis (red)
+                if (right)
+                    transform.position += transform.right * Time.deltaTime * speed;
+                if (left)
+                    transform.position -= transform.right * Time.deltaTime * speed;
+            }
+            else if (plushies.Count > 0)
+                Debug.Log("SET ACTIVE You need more plushies to push this object, you imbecile.");
         }
     }
 

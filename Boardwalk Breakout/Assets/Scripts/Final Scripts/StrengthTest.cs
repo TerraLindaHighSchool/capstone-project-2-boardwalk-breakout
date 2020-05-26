@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class StrengthTest : MonoBehaviour
 {
-    
+
     public GameObject doorHinge;
     public GameObject[] plushies;
+    public static GameObject player { get; set; }
 
     private bool open;
     bool stoppedCarry;
@@ -38,6 +39,10 @@ public class StrengthTest : MonoBehaviour
         {
             mallet.GetComponent<Carry>().stopCarry();
             stoppedCarry = true;
+            WinLose.currentEvent++;
+            player.GetComponent<PlayerController>().gettingInitial = true;
+            player.GetComponent<PlayerController>().initialPlush = player.GetComponent<PlayerController>().count + 2;
+
         }
     }
 
@@ -47,3 +52,4 @@ public class StrengthTest : MonoBehaviour
             plushie.GetComponent<FollowCommand>().enabled = false;
     }
 }
+

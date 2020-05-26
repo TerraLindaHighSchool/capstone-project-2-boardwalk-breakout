@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     bool isGrounded;
     bool isMoving;
+    
 
 
     //speed originally 10 
@@ -19,29 +20,28 @@ public class PlayerController : MonoBehaviour
 
     CharacterController controller;
     Animator anim;
-
-    public GameObject[] plushies;
-    public int count;
     
+    public int count { get; set; }
+    public int initialPlush;
+    public bool gettingInitial { get; set; }
 
     void Start()
     {
         FollowCommand.player = gameObject;
+        GuardController.player = gameObject;
+        WinLose.player = gameObject;
+        StrengthTest.player = gameObject;
+        WaterGun.player = gameObject;
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
         isGrounded = true;
-       
+        gettingInitial = true;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag.Equals("Ground"))
             isGrounded = true;
-
-        /*if (collision.gameObject.tag.Equals("Plushie"))
-        {
-            pAmount++;
-        } */  
     }
 
     private void OnCollisionExit(Collision collision)
@@ -59,12 +59,15 @@ public class PlayerController : MonoBehaviour
                 count++;
                 other.gameObject.GetComponent<FollowCommand>().enabled = true;
                 other.gameObject.GetComponent<FollowCommand>().playerWait = true;
-                
+                if (count == initialPlush)
+                {
+                    WinLose.currentEvent++;
+                    gettingInitial = false;
+                }
             }
 
-            else if (!other.gameObject.GetComponent<FollowCommand>().doingTask() == true)
+            else if (!other.GetComponent<FollowCommand>().doingTask() == true)
                 other.gameObject.GetComponent<FollowCommand>().playerWait = true;
-           
         }
 
         else if (interactable(other.gameObject))
@@ -157,3 +160,4 @@ public class PlayerController : MonoBehaviour
     }
   
 }
+

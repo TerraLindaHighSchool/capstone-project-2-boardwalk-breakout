@@ -6,8 +6,9 @@ public class WaterGun : MonoBehaviour
 {
     public GameObject doorHinge;
     public GameObject target;
-    public float time = 5f; 
+    public float time = 5f;
     public GameObject[] plushies;
+    public static GameObject player { get; set; }
 
     private bool played;
 
@@ -25,9 +26,6 @@ public class WaterGun : MonoBehaviour
             played = false;
     }
 
-
-
-
     // Update is called once per frame
     void Update()
     {
@@ -35,6 +33,7 @@ public class WaterGun : MonoBehaviour
         {
             target.GetComponent<Rigidbody>().isKinematic = false;
             doorHinge.transform.localRotation = Quaternion.Slerp(doorHinge.transform.localRotation, Quaternion.Euler(0, 90, 0), Time.deltaTime * 2);
+            WinLose.currentEvent = 2;
         }
         else if (played)
         {
@@ -45,10 +44,10 @@ public class WaterGun : MonoBehaviour
                 time -= Time.deltaTime;
         }
         if (Input.GetKeyUp(KeyCode.E) || !played)
-                particleLauncher.Stop();
-        
+            particleLauncher.Stop();
+
     }
-    
+
     private void Stay()
     {
         foreach (GameObject plushie in plushies)
@@ -56,3 +55,5 @@ public class WaterGun : MonoBehaviour
     }
 
 }
+
+
