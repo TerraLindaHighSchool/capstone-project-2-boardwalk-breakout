@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StrengthTest : MonoBehaviour
 {
-    
+
     public GameObject doorHinge;
     public GameObject[] plushies;
 
@@ -39,6 +39,7 @@ public class StrengthTest : MonoBehaviour
             mallet.GetComponent<Carry>().stopCarry();
             stoppedCarry = true;
         }
+        WinLose.currentEvent++;
     }
 
     private void Stay()

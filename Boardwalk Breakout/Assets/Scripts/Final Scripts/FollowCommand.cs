@@ -28,22 +28,24 @@ public class FollowCommand : MonoBehaviour
     {
         nav = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
-       
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!doingTask())
+        if (nav.enabled)
         {
-            if (goWait || playerWait)
-                Wait();
+            if (!doingTask())
+            {
+                if (goWait || playerWait)
+                    Wait();
+                else
+                    Follow();
+            }
             else
-                Follow();
-        }
-        else
-        {
-            nav.SetDestination(targetObj.transform.position);
+            {
+                nav.SetDestination(targetObj.transform.position);
+            }
         }
     }
 

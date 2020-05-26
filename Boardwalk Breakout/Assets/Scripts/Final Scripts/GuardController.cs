@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class GuardController : MonoBehaviour
 {
     private NavMeshAgent navMeshAgent;
+    public static GameObject player { get; set; }
     public Transform[] waypoints;
 
     int m_CurrentWaypointIndex;
@@ -27,9 +28,13 @@ public class GuardController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if((other.tag == "Plushie" && other.GetComponent<FollowCommand>().enabled) || (other.tag == "Player" && !other.isTrigger))
+        if ((other.tag == "Plushie" && other.GetComponent<FollowCommand>().enabled) || (other.tag == "Player" && !other.isTrigger))
         {
-            Destroy(other.gameObject);
+            if (other.tag == "Plushie")
+            {
+                Destroy(other.gameObject);
+                player.GetComponent<PlayerController>().count--;
+            }
         }
     }
 }
