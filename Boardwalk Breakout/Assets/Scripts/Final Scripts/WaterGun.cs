@@ -37,13 +37,14 @@ public class WaterGun : MonoBehaviour
         }
         else if (played)
         {
-            Stay();
             if (Input.GetKeyDown(KeyCode.E))
                 particleLauncher.Play();
             if (Input.GetKey(KeyCode.E))
                 time -= Time.deltaTime;
         }
-        if (Input.GetKeyUp(KeyCode.E) || !played)
+        else
+            Stay();
+        if (Input.GetKeyUp(KeyCode.E))
             particleLauncher.Stop();
 
     }

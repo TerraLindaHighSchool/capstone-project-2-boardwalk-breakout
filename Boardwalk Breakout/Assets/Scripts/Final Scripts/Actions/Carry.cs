@@ -54,6 +54,7 @@ public class Carry : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Tab))
         {
+            Debug.Log("SET INACTIVE You need more plushies to carry this object, you imbecile.");
             stopCarry();
         } 
         if (carrying)
