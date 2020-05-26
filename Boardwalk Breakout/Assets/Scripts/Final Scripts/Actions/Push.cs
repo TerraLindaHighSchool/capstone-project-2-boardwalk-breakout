@@ -13,6 +13,9 @@ public class Push : MonoBehaviour
     private bool stopped;
     private List<GameObject> plushies = new List<GameObject>();
 
+    public GameObject morePlushiesUI;
+    public GameObject noDoUI;
+
     //private GameObject objectPushed;
     [Header("Direction")] 
     [SerializeField]
@@ -37,6 +40,7 @@ public class Push : MonoBehaviour
             {
                 if (player.GetComponent<PlayerController>().count < numPlushReq)
                 {
+                    morePlushiesUI.SetActive(false);
                     Debug.Log("SET ACTIVE You need more plushies to push this object, you imbecile."); //needs text
                     wrong = true;
                 }
@@ -45,6 +49,7 @@ public class Push : MonoBehaviour
             }
             else if (other.GetComponent<FollowCommand>().goCarry)
             {
+                noDoUI.SetActive(false);
                 Debug.Log("SET ACTIVE You cannot carry this object, you imbecile. Try something else."); //needs text
                 wrong = true;
             }
@@ -60,6 +65,7 @@ public class Push : MonoBehaviour
             plushies.Remove(other.gameObject);
             if (!wrong)
             {
+                noDoUI.SetActive(false);
                 Debug.Log("SET INACTIVE You cannot carry this object, you imbecile. Try something else."); //needs text
                 Debug.Log("SET INACTIVE You need more plushies to push this object, you imbecile.");//needs text
             }

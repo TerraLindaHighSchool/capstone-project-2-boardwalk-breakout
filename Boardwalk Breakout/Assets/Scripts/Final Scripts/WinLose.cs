@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WinLose : MonoBehaviour
 {
@@ -24,11 +25,15 @@ public class WinLose : MonoBehaviour
     private void Start()
     {
         currentEvent = -1;
+        winUI.SetActive(false);
+        loseUI.SetActive(false);
     }
     void Update()
     {
         if (playerLost)
+        {
             playerLose();
+        }
         else
             numberLose();
     }
@@ -45,14 +50,24 @@ public class WinLose : MonoBehaviour
     {
         if ((!(currentEvent < 0) && player.GetComponent<PlayerController>().count < events[(int) currentEvent]))
             loseUI.SetActive(true);
+          
+            
             //Debug.Log("You let too many plushies get captured, you idiot!");
     }
 
     public void playerLose()
     {
         loseUI.SetActive(true);
-        Time.timeScale = 0f;
-        //Debug.Log("You got captured, you idiot!");
+
+        Debug.Log("You got captured, you idiot!");
     }
+
+    /*IEnumerator uiStart()
+    {
+        yield return new WaitForSeconds(2);
+        loseUI.SetActive(false);
+        SceneManager.LoadScene("Menu");
+
+    }*/
 }
     

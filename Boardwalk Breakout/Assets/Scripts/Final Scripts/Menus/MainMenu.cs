@@ -7,6 +7,7 @@ public class MainMenu : MonoBehaviour
 {
     public AudioSource confirm;
     public AudioSource menuSound;
+    //public GameObject loseUI;
 
     void Start()
     {
@@ -17,7 +18,10 @@ public class MainMenu : MonoBehaviour
     public void startGame()
     {
         confirm.Play();
-        SceneManager.LoadScene(1);
+        Application.LoadLevel(1);
+        //SceneManager.LoadScene(1);
+        //loseUI.SetActive(false);
+
     }
 
     public void howToPlayGame()
