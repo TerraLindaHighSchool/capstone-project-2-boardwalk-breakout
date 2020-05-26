@@ -68,6 +68,7 @@ public class Carry : MonoBehaviour
             //if(!(firstPlushie.tag == "Player"))
             firstPlushie = plushies[0];
             plushieRB = firstPlushie.GetComponent<Rigidbody>();
+            firstPlushie.GetComponent<FollowCommand>().setAllTasksFalse();
             for (int i = 1; i <= plushies.Count - 1; i++)
             {
                 plushies[i].transform.SetParent(firstPlushie.transform);
