@@ -22,6 +22,10 @@ public class WinLose : MonoBehaviour
     //this is required because if initial plushies is considered one of the events, the player will start out with less than required for the
     //initial plushies event and it will be instand game over
 
+
+    public GameObject winUI;
+    public GameObject loseUI;
+
     private void Start()
     {
         currentEvent = -1;
@@ -37,18 +41,23 @@ public class WinLose : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player" && !other.isTrigger && other.GetComponent<PlayerController>().count >= events[events.Length - 1])
-            Debug.Log("You win, winner!");
+            winUI.SetActive(true);
+            //Time.timeScale = 0f;
+            //Debug.Log("You win, winner!");
     }
 
     private void numberLose()
     {
         if ((currentEvent != -1 && !player.GetComponent<PlayerController>().gettingInitial && player.GetComponent<PlayerController>().count < events[currentEvent]) || initalPlushLose)
-            Debug.Log("You let too many plushies get captured, you idiot!");
+            loseUI.SetActive(true);
+            //Debug.Log("You let too many plushies get captured, you idiot!");
     }
 
     public void playerLose()
     {
-        Debug.Log("You got captured, you idiot!");
+        loseUI.SetActive(true);
+        Time.timeScale = 0f;
+        //Debug.Log("You got captured, you idiot!");
     }
 }
     
