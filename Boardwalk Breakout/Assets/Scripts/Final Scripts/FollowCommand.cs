@@ -85,19 +85,17 @@ public class FollowCommand : MonoBehaviour
         }
         else if (hasTarget) //does not do action unless player has touched an object
         {
-            if ((Input.GetKey(KeyCode.Alpha1) || Input.GetKey(KeyCode.Keypad1))) //PUSH
+            if ((Input.GetKey(KeyCode.Alpha1) || Input.GetKey(KeyCode.Keypad1)) && !goCarry) //PUSH
             {
                 anim.SetBool("isWalking", true);
                 nav.isStopped = false;
-                setAllTasksFalse();
                 goPush = true;
             }
 
-            if ((Input.GetKey(KeyCode.Alpha2) || Input.GetKey(KeyCode.Keypad2))) //CARRY
+            if ((Input.GetKey(KeyCode.Alpha2) || Input.GetKey(KeyCode.Keypad2)) && !goPush) //CARRY
             {
                 anim.SetBool("isWalking", true);
                 nav.isStopped = false;
-                setAllTasksFalse();
                 goCarry = true;
             }
         }
