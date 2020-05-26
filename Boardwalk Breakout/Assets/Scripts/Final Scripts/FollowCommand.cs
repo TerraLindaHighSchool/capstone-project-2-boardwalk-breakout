@@ -37,10 +37,10 @@ public class FollowCommand : MonoBehaviour
             {
                 if (goWait || playerWait)
                     Wait();
-                else if (nav.enabled)
+                else
                     Follow();
             }
-            else if (nav.enabled)
+            else if(nav.enabled)
             {
                 nav.SetDestination(targetObj.transform.position);
             }
@@ -48,9 +48,14 @@ public class FollowCommand : MonoBehaviour
 
     public void Follow()
     {
-        nav.isStopped = false;
+        if (nav.enabled)
+        {
+            nav.SetDestination(player.transform.position);
+            nav.isStopped = false;
+        }
+            
         anim.SetBool("isWalking", true);
-        nav.SetDestination(player.transform.position);
+       
     }
 
     private void Wait()
