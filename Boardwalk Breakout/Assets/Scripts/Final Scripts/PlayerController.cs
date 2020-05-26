@@ -22,12 +22,12 @@ public class PlayerController : MonoBehaviour
     Animator anim;
     
     public int count { get; set; }
-    public int initialPlush;
-    public bool gettingInitial { get; set; }
 
     void Start()
     {
         FollowCommand.player = gameObject;
+        Push.player = gameObject;
+        Carry.player = gameObject;
         GuardController.player = gameObject;
         WinLose.player = gameObject;
         StrengthTest.player = gameObject;
@@ -35,7 +35,6 @@ public class PlayerController : MonoBehaviour
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
         isGrounded = true;
-        gettingInitial = true;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -59,13 +58,10 @@ public class PlayerController : MonoBehaviour
                 count++;
                 other.gameObject.GetComponent<FollowCommand>().enabled = true;
                 other.gameObject.GetComponent<FollowCommand>().playerWait = true;
-                if (count == initialPlush)
-                {
-                    WinLose.currentEvent++;
-                    gettingInitial = false;
-                }
+                WinLose.currentEvent = (float) WinLose.currentEvent + other.GetComponent<FollowCommand>().needsRescue;
+                Debug.Log(WinLose.currentEvent);
+                Debug.Log(count);
             }
-
             else if (!other.GetComponent<FollowCommand>().doingTask() == true)
                 other.gameObject.GetComponent<FollowCommand>().playerWait = true;
         }

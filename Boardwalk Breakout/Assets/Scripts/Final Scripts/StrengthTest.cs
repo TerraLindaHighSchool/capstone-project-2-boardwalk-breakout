@@ -39,10 +39,6 @@ public class StrengthTest : MonoBehaviour
         {
             mallet.GetComponent<Carry>().stopCarry();
             stoppedCarry = true;
-            WinLose.currentEvent++;
-            player.GetComponent<PlayerController>().gettingInitial = true;
-            player.GetComponent<PlayerController>().initialPlush = player.GetComponent<PlayerController>().count + 2;
-
         }
     }
 

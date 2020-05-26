@@ -7,15 +7,17 @@ using UnityEngine.AI;
 public class Carry : MonoBehaviour
 {
     public int numPlushReq;
-    
+    public static GameObject player { get; set; }
+
     private List<GameObject> plushies = new List<GameObject>();
     private Rigidbody carryRB;
     private Rigidbody plushieRB;
     private GameObject firstPlushie;
-    private bool carrying;
+    public bool carrying { get; set; }
+
     //private bool dropped;
 
-    private bool wrongAction;
+    public bool wrong;
 
     public GameObject notEnoughPlushiesUI;
 
@@ -30,10 +32,20 @@ public class Carry : MonoBehaviour
         if (other.tag == "Plushie" && !carrying)
         {
             if (other.GetComponent<FollowCommand>().goCarry)
-                plushies.Add(other.gameObject);
+            {
+                if (player.GetComponent<PlayerController>().count < numPlushReq)
+                {
+                    notEnoughPlushiesUI.SetActive(true);
+                    Debug.Log("SET ACTIVE You need more plushies to carry this object, you imbecile.");
+                }
+                else
+                    plushies.Add(other.gameObject);
+            }
             else if (other.GetComponent<FollowCommand>().goPush)
-                notEnoughPlushiesUI.SetActive(true);
+            {
+                notEnoughPlushiesUI.SetActive(true); //SHOULD SAY INSTEAD "YOU CANT DO THIS WITH THIS OBJECT" Tristyn
                 Debug.Log("SET ACTIVE You cannot push this object, you imbecile. Try something else.");
+            }
         }
     }
 
@@ -48,20 +60,23 @@ public class Carry : MonoBehaviour
                 firstPlushie = null;
                 plushieRB = null;
             }
-            notEnoughPlushiesUI.SetActive(false);
-            Debug.Log("SET INACTIVE You cannot push this object, you imbecile. Try something else.");
+            if (!wrong)
+            {
+                notEnoughPlushiesUI.SetActive(false); //again, this should be a "you cant do this with this object" text Tristyn
+                Debug.Log("SET INACTIVE You cannot push this object, you imbecile. Try something else.");
+                notEnoughPlushiesUI.SetActive(false);
+                Debug.Log("SET INACTIVE You need more plushies to carry this object, you imbecile.");
+            }
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Tab))
+        if (carrying && Input.GetKey(KeyCode.Tab))
         {
-            notEnoughPlushiesUI.SetActive(true);
-            Debug.Log("SET INACTIVE You need more plushies to carry this object, you imbecile.");
             stopCarry();
-        } 
+        }
         if (carrying)
         {
             for (int i = 1; i <= plushies.Count - 1; i++)
@@ -69,7 +84,6 @@ public class Carry : MonoBehaviour
         }
         else if (plushies.Count >= numPlushReq)
         {
-            Debug.Log("SET INACTIVE You need more plushies to carry this object, you imbecile.");
             GetComponent<Rigidbody>().isKinematic = true;
             //if(!(firstPlushie.tag == "Player"))
             firstPlushie = plushies[0];
@@ -89,8 +103,6 @@ public class Carry : MonoBehaviour
 
             carrying = true;
         }
-        else if (plushies.Count > 0)
-            Debug.Log("SET ACTIVE You need more plushies to carry this object, you imbecile.");
     }
 
     public void stopCarry()
@@ -104,12 +116,9 @@ public class Carry : MonoBehaviour
             plushies.RemoveAt(i);
             plushies[i].GetComponent<FollowCommand>().playerWait = false;
         }
-        if (carrying)
-        {
             GetComponent<Rigidbody>().isKinematic = false;
             transform.SetParent(null);
             carrying = false;
-        }
         //dropped = true;
     }
 }

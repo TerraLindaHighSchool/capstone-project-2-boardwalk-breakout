@@ -32,8 +32,6 @@ public class GuardController : MonoBehaviour
         {
             Destroy(other.gameObject);
             player.GetComponent<PlayerController>().count--;
-            if (player.GetComponent<PlayerController>().gettingInitial) //if you lose any plushies when you are first getting them, you automatically lose
-                WinLose.initalPlushLose = true;
         }
         else if (other.tag == "Player" && !other.isTrigger)
             WinLose.playerLost = true;

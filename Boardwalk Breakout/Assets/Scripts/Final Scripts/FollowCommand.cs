@@ -12,6 +12,7 @@ public class FollowCommand : MonoBehaviour
     public bool goWait { get; private set; }
     public bool playerWait { get; set; }
 
+    public float needsRescue;
 
     public static GameObject targetObj { get; set; }
     public static GameObject player { get; set; }
@@ -26,6 +27,7 @@ public class FollowCommand : MonoBehaviour
 
     private void Start()
     {
+        setAllTasksFalse();
         nav = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
     }
@@ -53,7 +55,6 @@ public class FollowCommand : MonoBehaviour
             nav.SetDestination(player.transform.position);
             nav.isStopped = false;
         }
-            
         anim.SetBool("isWalking", true);
        
     }
@@ -71,8 +72,15 @@ public class FollowCommand : MonoBehaviour
 
     public bool doingTask()
     {
-        if (Input.GetKey(KeyCode.Tab)) //FOLLOW
+        if (!(hasTarget && (targetObj.GetComponent<Carry>() != null && targetObj.GetComponent<Carry>().carrying)) && Input.GetKey(KeyCode.Tab)) //FOLLOW
         {
+            if (hasTarget)
+            {
+                if (targetObj.GetComponent<Carry>() != null)
+                    targetObj.GetComponent<Carry>().wrong = false;
+                if (targetObj.GetComponent<Push>() != null)
+                    targetObj.GetComponent<Push>().wrong = false;
+            }
             setAllTasksFalse();
             targetObj = null;
             return hasTarget = false;
