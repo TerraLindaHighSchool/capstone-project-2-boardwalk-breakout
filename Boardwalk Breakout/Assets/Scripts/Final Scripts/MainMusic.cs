@@ -1,18 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+[RequireComponent(typeof(AudioSource))]
 
 public class MainMusic : MonoBehaviour
 {
-    public AudioSource introMusic;
-    public AudioSource mainMusic;
 
-    // Start is called before the first frame update
-    void Start()
+    public AudioSource intro;
+    public AudioSource mainM;
+    private bool startedLoop;
+
+    void FixedUpdate()
     {
-        introMusic.Play();
-        mainMusic.Play();
+        if(!intro.isPlaying && !startedLoop)
+        {
+            mainM.GetComponent<AudioSource>().loop = true;
+            mainM.Play();
+            
+            startedLoop = true;
+        }    
     }
 
-    
 }

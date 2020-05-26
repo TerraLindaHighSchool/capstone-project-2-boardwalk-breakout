@@ -5,41 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class GameEnding : MonoBehaviour
 {
-    public GameObject player;
-    public GameObject gameEndingUI;
-    public float plushieInventory = 3;
-
-    bool isPlayerAtExit;
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (plushieInventory == 3)
-        {
-            if (other.gameObject == player)
-            {
-                isPlayerAtExit = true;
-            }
-        }
-    }
-
-    void Update()
-    {
-        if (isPlayerAtExit)
-        {
-            endLevel();
-        }    
-    }
-
-    void endLevel()
-    {
-        gameEndingUI.SetActive(true);
-        Time.timeScale = 0f;
-    }
+ 
+    public GameObject winUI;
+    public GameObject loseUI;
 
     public void playAgain()
     {
-        Application.LoadLevel(Application.loadedLevel);
-        Time.timeScale = 1f;
+        winUI.SetActive(false);
+        loseUI.SetActive(false);
+        SceneManager.LoadScene(1);
+        //Application.LoadLevel(Application.loadedLevel);
+        //Time.timeScale = 1f;
     }
+
 
 }
