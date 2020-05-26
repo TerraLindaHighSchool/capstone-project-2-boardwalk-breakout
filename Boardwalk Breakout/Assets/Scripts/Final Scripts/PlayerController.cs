@@ -66,9 +66,8 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
-            else if (!other.gameObject.GetComponent<FollowCommand>().doingTask() == true)
+            else if (!other.GetComponent<FollowCommand>().doingTask() == true)
                 other.gameObject.GetComponent<FollowCommand>().playerWait = true;
-           
         }
 
         else if (interactable(other.gameObject))
