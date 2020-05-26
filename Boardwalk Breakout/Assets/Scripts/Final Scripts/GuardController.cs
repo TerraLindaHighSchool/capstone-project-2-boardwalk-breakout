@@ -28,13 +28,14 @@ public class GuardController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if ((other.tag == "Plushie" && other.GetComponent<FollowCommand>().enabled) || (other.tag == "Player" && !other.isTrigger))
+        if (other.tag == "Plushie" && other.GetComponent<FollowCommand>().enabled)
         {
-            if (other.tag == "Plushie")
-            {
-                Destroy(other.gameObject);
-                player.GetComponent<PlayerController>().count--;
-            }
+            Destroy(other.gameObject);
+            player.GetComponent<PlayerController>().count--;
+            if (player.GetComponent<PlayerController>().gettingInitial) //if you lose any plushies when you are first getting them, you automatically lose
+                WinLose.initalPlushLose = true;
         }
+        else if (other.tag == "Player" && !other.isTrigger)
+            WinLose.playerLost = true;
     }
 }

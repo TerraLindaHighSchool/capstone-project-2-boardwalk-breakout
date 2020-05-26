@@ -33,20 +33,17 @@ public class FollowCommand : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (nav.enabled)
-        {
             if (!doingTask())
             {
                 if (goWait || playerWait)
                     Wait();
-                else
+                else if (nav.enabled)
                     Follow();
             }
-            else
+            else if (nav.enabled)
             {
                 nav.SetDestination(targetObj.transform.position);
             }
-        }
     }
 
     public void Follow()
@@ -58,8 +55,11 @@ public class FollowCommand : MonoBehaviour
 
     private void Wait()
     {
-        nav.velocity = Vector3.zero;
-        nav.isStopped = true;
+        if (nav.enabled)
+        {
+            nav.velocity = Vector3.zero;
+            nav.isStopped = true;
+        }
         anim.SetBool("isWalking", false);
     }
 

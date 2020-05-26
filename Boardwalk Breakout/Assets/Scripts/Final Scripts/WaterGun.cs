@@ -10,6 +10,7 @@ public class WaterGun : MonoBehaviour
     public GameObject[] plushies;
 
     private bool played;
+    private bool eventDone;
 
     public ParticleSystem particleLauncher;
 
@@ -35,7 +36,11 @@ public class WaterGun : MonoBehaviour
         {
             target.GetComponent<Rigidbody>().isKinematic = false;
             doorHinge.transform.localRotation = Quaternion.Slerp(doorHinge.transform.localRotation, Quaternion.Euler(0, 90, 0), Time.deltaTime * 2);
-            WinLose.currentEvent++;
+            if (!eventDone)
+            {
+                WinLose.currentEvent++;
+                eventDone = true;
+            }
         }
         else if (played)
         {

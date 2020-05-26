@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     bool isGrounded;
     bool isMoving;
+    
 
 
     //speed originally 10 
@@ -19,9 +20,10 @@ public class PlayerController : MonoBehaviour
 
     CharacterController controller;
     Animator anim;
-
+    
     public int count { get; set; }
     public int initialPlush;
+    public bool gettingInitial { get; private set; }
 
     void Start()
     {
@@ -31,7 +33,7 @@ public class PlayerController : MonoBehaviour
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
         isGrounded = true;
-
+        gettingInitial = true;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -56,12 +58,15 @@ public class PlayerController : MonoBehaviour
                 other.gameObject.GetComponent<FollowCommand>().enabled = true;
                 other.gameObject.GetComponent<FollowCommand>().playerWait = true;
                 if (count == initialPlush)
+                {
                     WinLose.currentEvent++;
+                    gettingInitial = false;
+                }
             }
 
             else if (!other.gameObject.GetComponent<FollowCommand>().doingTask() == true)
                 other.gameObject.GetComponent<FollowCommand>().playerWait = true;
-
+           
         }
 
         else if (interactable(other.gameObject))
@@ -106,7 +111,7 @@ public class PlayerController : MonoBehaviour
                 anim.SetBool("walkBackwards", false);
                 anim.SetBool("isJumping", true);
                 Debug.Log(anim.GetBool("isJumping"));
-                if (isMoving)
+                if(isMoving)
                     moveDir += new Vector3(0, jumpHeight, 0);
                 else
                     moveDir = new Vector3(0, jumpHeight, 0);
@@ -138,7 +143,7 @@ public class PlayerController : MonoBehaviour
         {
             this.transform.Rotate(Vector3.up, -rotSpeed * Time.deltaTime);
         }
-
+        
         moveDir.y -= gravity * Time.deltaTime;
         controller.Move(moveDir * Time.deltaTime);
 
@@ -152,6 +157,6 @@ public class PlayerController : MonoBehaviour
             return true;
         return false;
     }
-
+  
 }
 

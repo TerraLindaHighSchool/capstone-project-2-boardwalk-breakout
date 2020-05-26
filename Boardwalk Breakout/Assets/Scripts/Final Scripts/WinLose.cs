@@ -6,25 +6,50 @@ public class WinLose : MonoBehaviour
 {
     public static GameObject player { get; set; }
     public int[] events;
-    public static int currentEvent { get; set; }
+    public static int currentEvent { get; set; } //each int represents its event's (in order) required plushies to complete
+    /*
+     * CURRENT EVENT INDEX
+     *  #       Function                                                            Moving onto next event
+     * -1: player has yet to pick up inital plushies (no event is taking place) -> player controller ++currentEvent
+     * 0+: player is doing tasks, lose if don't have required plushies -> "success" statement in each event ++currentEvent (ex: opening the door to a cage)
+     * last event: number required to exit the level successfully
+     */
+    
+    public static bool playerLost { get; set; } //activated by guard controller when player is caught
+
+    public static bool initalPlushLose { get; set; } 
+    //if you lose any plushies while getting initial plushies, activated by guard.
+    //this is required because if initial plushies is considered one of the events, the player will start out with less than required for the
+    //initial plushies event and it will be instand game over
 
     private void Start()
     {
         currentEvent = -1;
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
-        if (numberLose())
-            Debug.Log("sup");
+        if (playerLost)
+            playerLose();
+        else
+            numberLose();
     }
 
-    private bool numberLose()
+    private void OnTriggerEnter(Collider other)
     {
-        if (currentEvent != -1 && player.GetComponent<PlayerController>().count != 0 && player.GetComponent<PlayerController>().count < events[currentEvent])
-            return true;
-        else
-            return false;
+        if (other.tag == "Player" && other.GetComponent<PlayerController>().count >= events[events.Length - 1])
+            Debug.Log("You win, winner!");
+    }
+
+    private void numberLose()
+    {
+        if ((currentEvent != -1 && player.GetComponent<PlayerController>().count != 0 && player.GetComponent<PlayerController>().count < events[currentEvent]) || initalPlushLose)
+            Debug.Log("You let too many plushies get captured, you idiot!");
+    }
+
+    public void playerLose()
+    {
+        Debug.Log("You got captured, you idiot!");
     }
 }
+    

@@ -81,7 +81,6 @@ public class Carry : MonoBehaviour
         }
         else if (plushies.Count >= numPlushReq)
         {
-
             GetComponent<Rigidbody>().isKinematic = true;
             //if(!(firstPlushie.tag == "Player"))
             firstPlushie = plushies[0];

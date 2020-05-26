@@ -38,8 +38,9 @@ public class StrengthTest : MonoBehaviour
         {
             mallet.GetComponent<Carry>().stopCarry();
             stoppedCarry = true;
+            WinLose.currentEvent++;
         }
-        WinLose.currentEvent++;
+        
     }
 
     private void Stay()
