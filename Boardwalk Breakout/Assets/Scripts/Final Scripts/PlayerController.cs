@@ -28,6 +28,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         FollowCommand.player = gameObject;
+        Push.player = gameObject;
+        Carry.player = gameObject;
         GuardController.player = gameObject;
         WinLose.player = gameObject;
         StrengthTest.player = gameObject;

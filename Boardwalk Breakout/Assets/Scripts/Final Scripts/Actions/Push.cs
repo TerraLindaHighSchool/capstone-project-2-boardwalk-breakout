@@ -6,6 +6,7 @@ public class Push : MonoBehaviour
 {
     public int numPlushReq;
     public float speed = 8;
+    public static GameObject player { get; set; }
 
     private bool stopped;
     private List<GameObject> plushies = new List<GameObject>();

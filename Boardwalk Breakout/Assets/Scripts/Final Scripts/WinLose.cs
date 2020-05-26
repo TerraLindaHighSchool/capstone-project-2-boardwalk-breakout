@@ -40,7 +40,7 @@ public class WinLose : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player" && !other.isTrigger && other.GetComponent<PlayerController>().count >= events[events.Length - 1])
+        if (currentEvent == events.Length -1 && other.tag == "Player" && !other.isTrigger && other.GetComponent<PlayerController>().count >= events[events.Length - 1])
             winUI.SetActive(true);
             //Time.timeScale = 0f;
             //Debug.Log("You win, winner!");

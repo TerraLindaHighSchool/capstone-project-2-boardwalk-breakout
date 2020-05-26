@@ -53,7 +53,6 @@ public class FollowCommand : MonoBehaviour
             nav.SetDestination(player.transform.position);
             nav.isStopped = false;
         }
-            
         anim.SetBool("isWalking", true);
        
     }
@@ -71,7 +70,7 @@ public class FollowCommand : MonoBehaviour
 
     public bool doingTask()
     {
-        if (Input.GetKey(KeyCode.Tab)) //FOLLOW
+        if ((hasTarget && targetObj.GetComponent<Carry>() != null && !targetObj.GetComponent<Carry>().carrying) && Input.GetKey(KeyCode.Tab)) //FOLLOW
         {
             setAllTasksFalse();
             targetObj = null;
