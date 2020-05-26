@@ -23,13 +23,15 @@ public class PlayerController : MonoBehaviour
     
     public int count { get; set; }
     public int initialPlush;
-    public bool gettingInitial { get; private set; }
+    public bool gettingInitial { get; set; }
 
     void Start()
     {
         FollowCommand.player = gameObject;
         GuardController.player = gameObject;
         WinLose.player = gameObject;
+        StrengthTest.player = gameObject;
+        WaterGun.player = gameObject;
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
         isGrounded = true;
