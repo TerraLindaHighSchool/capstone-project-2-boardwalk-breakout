@@ -8,6 +8,8 @@ public class Push : MonoBehaviour
     public float speed = 8;
     public static GameObject player { get; set; }
 
+    public bool wrong;
+
     private bool stopped;
     private List<GameObject> plushies = new List<GameObject>();
 
@@ -31,10 +33,21 @@ public class Push : MonoBehaviour
     {
         if (other.tag == "Plushie")
         {
-            if (other.GetComponent<FollowCommand>().goPush)
-                plushies.Add(other.gameObject);
+            if (other.GetComponent<FollowCommand>().goPush && !stopped)
+            {
+                if (player.GetComponent<PlayerController>().count < numPlushReq)
+                {
+                    Debug.Log("SET ACTIVE You need more plushies to push this object, you imbecile."); //needs text
+                    wrong = true;
+                }
+               else
+                    plushies.Add(other.gameObject);
+            }
             else if (other.GetComponent<FollowCommand>().goCarry)
-                Debug.Log("SET ACTIVE You cannot carry this object, you imbecile. Try something else.");
+            {
+                Debug.Log("SET ACTIVE You cannot carry this object, you imbecile. Try something else."); //needs text
+                wrong = true;
+            }
         }
         else if (other.tag == "Stop")
             stopped = true;
@@ -45,18 +58,19 @@ public class Push : MonoBehaviour
         if (other.tag == "Plushie")
         {
             plushies.Remove(other.gameObject);
-            Debug.Log("SET INACTIVE You cannot carry this object, you imbecile. Try something else.");
+            if (!wrong)
+            {
+                Debug.Log("SET INACTIVE You cannot carry this object, you imbecile. Try something else."); //needs text
+                Debug.Log("SET INACTIVE You need more plushies to push this object, you imbecile.");//needs text
+            }
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!stopped)
-        {
-            if (plushies.Count >= numPlushReq)
+            if (plushies.Count >= numPlushReq && !stopped)
             {
-                Debug.Log("SET INACTIVE You need more plushies to push this object, you imbecile.");
                 //z axis (blue)
                 if (forward)
                     transform.position += transform.forward * Time.deltaTime * speed;
@@ -68,9 +82,6 @@ public class Push : MonoBehaviour
                 if (left)
                     transform.position -= transform.right * Time.deltaTime * speed;
             }
-            else if (plushies.Count > 0)
-                Debug.Log("SET ACTIVE You need more plushies to push this object, you imbecile.");
-        }
     }
 
     public void setAllDirectionsFalse()

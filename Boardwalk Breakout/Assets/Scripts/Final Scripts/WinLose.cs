@@ -6,7 +6,7 @@ public class WinLose : MonoBehaviour
 {
     public static GameObject player { get; set; }
     public int[] events;
-    public static int currentEvent { get; set; } //each int represents its event's (in order) required plushies to complete
+    public static float currentEvent { get; set; } //each int represents its event's (in order) required plushies to complete
     /*
      * CURRENT EVENT INDEX
      *  #       Function                                                            Moving onto next event
@@ -16,11 +16,6 @@ public class WinLose : MonoBehaviour
      */
     
     public static bool playerLost { get; set; } //activated by guard controller when player is caught
-
-    public static bool initalPlushLose { get; set; }
-    //if you lose any plushies while getting initial plushies, activated by guard.
-    //this is required because if initial plushies is considered one of the events, the player will start out with less than required for the
-    //initial plushies event and it will be instand game over
 
 
     public GameObject winUI;
@@ -48,7 +43,7 @@ public class WinLose : MonoBehaviour
 
     private void numberLose()
     {
-        if ((currentEvent != -1 && !player.GetComponent<PlayerController>().gettingInitial && player.GetComponent<PlayerController>().count < events[currentEvent]) || initalPlushLose)
+        if ((currentEvent != -1 && currentEvent % 1 == 0 && player.GetComponent<PlayerController>().count < events[(int) currentEvent]))
             loseUI.SetActive(true);
             //Debug.Log("You let too many plushies get captured, you idiot!");
     }

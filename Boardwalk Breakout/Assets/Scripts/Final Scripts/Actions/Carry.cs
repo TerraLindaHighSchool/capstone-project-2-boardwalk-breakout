@@ -14,9 +14,10 @@ public class Carry : MonoBehaviour
     private Rigidbody plushieRB;
     private GameObject firstPlushie;
     public bool carrying { get; set; }
+
     //private bool dropped;
 
-    private bool wrongAction;
+    public bool wrong;
 
     public GameObject notEnoughPlushiesUI;
 
@@ -42,7 +43,7 @@ public class Carry : MonoBehaviour
             }
             else if (other.GetComponent<FollowCommand>().goPush)
             {
-                notEnoughPlushiesUI.SetActive(true);
+                notEnoughPlushiesUI.SetActive(true); //SHOULD SAY INSTEAD "YOU CANT DO THIS WITH THIS OBJECT" Tristyn
                 Debug.Log("SET ACTIVE You cannot push this object, you imbecile. Try something else.");
             }
         }
@@ -59,10 +60,13 @@ public class Carry : MonoBehaviour
                 firstPlushie = null;
                 plushieRB = null;
             }
-            notEnoughPlushiesUI.SetActive(false);
-            Debug.Log("SET INACTIVE You cannot push this object, you imbecile. Try something else.");
-            notEnoughPlushiesUI.SetActive(false);
-            Debug.Log("SET INACTIVE You need more plushies to carry this object, you imbecile.");
+            if (!wrong)
+            {
+                notEnoughPlushiesUI.SetActive(false); //again, this should be a "you cant do this with this object" text Tristyn
+                Debug.Log("SET INACTIVE You cannot push this object, you imbecile. Try something else.");
+                notEnoughPlushiesUI.SetActive(false);
+                Debug.Log("SET INACTIVE You need more plushies to carry this object, you imbecile.");
+            }
         }
     }
 
