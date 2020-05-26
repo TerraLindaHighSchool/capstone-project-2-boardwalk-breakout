@@ -17,6 +17,8 @@ public class Carry : MonoBehaviour
 
     private bool wrongAction;
 
+    public GameObject notEnoughPlushiesUI;
+
     private void Start()
     {
         carryRB = GetComponent<Rigidbody>();
@@ -30,6 +32,7 @@ public class Carry : MonoBehaviour
             if (other.GetComponent<FollowCommand>().goCarry)
                 plushies.Add(other.gameObject);
             else if (other.GetComponent<FollowCommand>().goPush)
+                notEnoughPlushiesUI.SetActive(true);
                 Debug.Log("SET ACTIVE You cannot push this object, you imbecile. Try something else.");
         }
     }
@@ -45,6 +48,7 @@ public class Carry : MonoBehaviour
                 firstPlushie = null;
                 plushieRB = null;
             }
+            notEnoughPlushiesUI.SetActive(false);
             Debug.Log("SET INACTIVE You cannot push this object, you imbecile. Try something else.");
         }
     }
@@ -54,6 +58,7 @@ public class Carry : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Tab))
         {
+            notEnoughPlushiesUI.SetActive(true);
             Debug.Log("SET INACTIVE You need more plushies to carry this object, you imbecile.");
             stopCarry();
         } 

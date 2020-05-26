@@ -14,16 +14,24 @@ public class WaterGun : MonoBehaviour
 
     public ParticleSystem particleLauncher;
 
+    public GameObject waterUI;
+
     void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.tag == "Player")
+        {
             played = true;
+            waterUI.SetActive(true);
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "Player")
+        { 
             played = false;
+            waterUI.SetActive(false);
+        }
     }
 
     // Update is called once per frame
