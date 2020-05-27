@@ -17,7 +17,7 @@ public class Carry : MonoBehaviour
 
     //private bool dropped;
 
-    public bool wrong;
+    public bool wrong { get; set; }
 
     public GameObject notEnoughPlushiesUI;
 
@@ -53,7 +53,7 @@ public class Carry : MonoBehaviour
     {
         if ((other.tag == "Plushie" && !carrying))
         {
-            if(other)
+            if (other)
             plushies.Remove(other.gameObject);
             if (plushies.Count == 0)
             {
@@ -73,7 +73,7 @@ public class Carry : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (carrying && Input.GetKey(KeyCode.Tab))
+        if (Input.GetKey(KeyCode.LeftShift))
         {
             stopCarry();
         }
@@ -94,8 +94,6 @@ public class Carry : MonoBehaviour
                 plushies[i].transform.SetParent(firstPlushie.transform);
                 plushies[i].GetComponent<NavMeshAgent>().enabled = false;
                 plushies[i].GetComponent<FollowCommand>().setAllTasksFalse();
-
-
             }
             transform.position = plushieRB.position + new Vector3(0, firstPlushie.transform.lossyScale.y * 1.2f, 0);
             transform.rotation = Quaternion.identity;
@@ -109,12 +107,11 @@ public class Carry : MonoBehaviour
     {
         FollowCommand.hasTarget = false;
         FollowCommand.targetObj = null;
-        for (int i = plushies.Count-1; i >= 0; i--)
+        for (int i = plushies.Count - 1; i >= 0; i--)
         {
             plushies[i].transform.SetParent(null);
             plushies[i].GetComponent<NavMeshAgent>().enabled = true;
             plushies.RemoveAt(i);
-            plushies[i].GetComponent<FollowCommand>().playerWait = false;
         }
             GetComponent<Rigidbody>().isKinematic = false;
             transform.SetParent(null);

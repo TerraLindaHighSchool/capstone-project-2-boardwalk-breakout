@@ -17,6 +17,7 @@ public class WinLose : MonoBehaviour
      */
     
     public static bool playerLost { get; set; } //activated by guard controller when player is caught
+    public static bool numLose { get; set; }
 
 
     public GameObject winUI;
@@ -48,7 +49,7 @@ public class WinLose : MonoBehaviour
 
     private void numberLose()
     {
-        if ((!(currentEvent < 0) && player.GetComponent<PlayerController>().count < events[(int) currentEvent]))
+        if ((!(currentEvent < 0) && player.GetComponent<PlayerController>().count < events[(int) currentEvent]) || numLose)
             loseUI.SetActive(true);
           
             

@@ -72,7 +72,7 @@ public class FollowCommand : MonoBehaviour
 
     public bool doingTask()
     {
-        if (!(hasTarget && (targetObj.GetComponent<Carry>() != null && targetObj.GetComponent<Carry>().carrying)) && Input.GetKey(KeyCode.Tab)) //FOLLOW
+        if (Input.GetKey(KeyCode.Tab)) //FOLLOW
         {
             if (hasTarget)
             {
