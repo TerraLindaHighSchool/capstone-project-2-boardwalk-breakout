@@ -21,12 +21,11 @@ public class WinLose : MonoBehaviour
 
     public GameObject winUI;
     public GameObject loseUI;
+   
 
     private void Start()
     {
         currentEvent = -1;
-        winUI.SetActive(false);
-        loseUI.SetActive(false);
     }
     void Update()
     {
@@ -42,32 +41,19 @@ public class WinLose : MonoBehaviour
     {
         if (currentEvent == events.Length -1 && other.tag == "Player" && !other.isTrigger && other.GetComponent<PlayerController>().count >= events[events.Length - 1])
             winUI.SetActive(true);
-            //Time.timeScale = 0f;
-            //Debug.Log("You win, winner!");
     }
 
     private void numberLose()
     {
         if ((!(currentEvent < 0) && player.GetComponent<PlayerController>().count < events[(int) currentEvent]))
             loseUI.SetActive(true);
-          
-            
-            //Debug.Log("You let too many plushies get captured, you idiot!");
     }
 
     public void playerLose()
     {
-        loseUI.SetActive(true);
-
-        Debug.Log("You got captured, you idiot!");
+        loseUI.SetActive(true);        
     }
 
-    /*IEnumerator uiStart()
-    {
-        yield return new WaitForSeconds(2);
-        loseUI.SetActive(false);
-        SceneManager.LoadScene("Menu");
-
-    }*/
+    
 }
     

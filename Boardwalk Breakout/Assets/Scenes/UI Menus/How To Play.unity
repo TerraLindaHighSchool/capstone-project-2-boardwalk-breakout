@@ -651,14 +651,14 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 0.8
   m_Text: "Goal: Save your plushie friends by completing carinival games! But beware
-    the guards who can snatch you and your friends.\n\nYour Abilities:\n\nW,A,S,D
+    of the guards who can snatch you and your friends.\n\nYour Abilities:\n\nW,A,S,D
     - To move \n\nPlushies Abilities:\n\n1 - Push\n(you must touch the object first)\n2
     - Carry\n(you must touch the object first)\n3 - Wait\n\nTab - Stops plushies'
     current actions and returns back to the player.  \n\nEsc - Pause the game\n\nHINTS:\nIf
     you press Tab once, the plushies wil continue to hold the object. Press Tab twice,
     they will drop the object and return back to you.\n\nWhen using Push and Carry,
-    you can't switch between these two actions quickly, else your plushies will get
-    confused. Remember: you're the brains to this operation! "
+    you can't switch between these two actions quickly, or else your plushies will
+    get confused. Remember: you're the brains to this operation! "
 --- !u!222 &1366064354
 CanvasRenderer:
   m_ObjectHideFlags: 0

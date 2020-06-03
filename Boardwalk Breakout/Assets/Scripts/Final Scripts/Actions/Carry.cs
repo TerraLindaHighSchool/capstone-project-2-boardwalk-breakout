@@ -20,11 +20,17 @@ public class Carry : MonoBehaviour
     public bool wrong;
 
     public GameObject notEnoughPlushiesUI;
+    public GameObject youNoDoUI;
+
+    //public int counterForPlushies = 0;
 
     private void Start()
     {
         carryRB = GetComponent<Rigidbody>();
-       
+        /*GameObject thePlayer = GameObject.Find("Main Player");
+        PlayerController plushieCounter = thePlayer.GetComponent<PlayerController>();
+        counterForPlushies = plushieCounter.count;*/
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -33,24 +39,26 @@ public class Carry : MonoBehaviour
         {
             if (other.GetComponent<FollowCommand>().goCarry)
             {
-                if (player.GetComponent<PlayerController>().count < numPlushReq)
+                if ((other.tag == "Player") && (plushies.Count < numPlushReq))
                 {
-                    notEnoughPlushiesUI.SetActive(true);
-                    Debug.Log("SET ACTIVE You need more plushies to carry this object, you imbecile.");
+                    Debug.Log("It's touching but not enough plushies");
+                   notEnoughPlushiesUI.SetActive(true);   
                 }
                 else
                     plushies.Add(other.gameObject);
             }
-            else if (other.GetComponent<FollowCommand>().goPush)
+
+            if (other.GetComponent<FollowCommand>().goPush)
             {
-                notEnoughPlushiesUI.SetActive(true); //SHOULD SAY INSTEAD "YOU CANT DO THIS WITH THIS OBJECT" Tristyn
-                Debug.Log("SET ACTIVE You cannot push this object, you imbecile. Try something else.");
+                youNoDoUI.SetActive(true);
             }
+            
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
+        
         if ((other.tag == "Plushie" && !carrying))
         {
             if(other)
@@ -62,13 +70,13 @@ public class Carry : MonoBehaviour
             }
             if (!wrong)
             {
-                notEnoughPlushiesUI.SetActive(false); //again, this should be a "you cant do this with this object" text Tristyn
-                Debug.Log("SET INACTIVE You cannot push this object, you imbecile. Try something else.");
                 notEnoughPlushiesUI.SetActive(false);
-                Debug.Log("SET INACTIVE You need more plushies to carry this object, you imbecile.");
+                youNoDoUI.SetActive(false);
             }
         }
     }
+
+  
 
     // Update is called once per frame
     void Update()
@@ -122,3 +130,26 @@ public class Carry : MonoBehaviour
         //dropped = true;
     }
 }
+
+/*
+ *
+ *
+ *    if (other.tag == "Plushie" && !carrying)
+        {
+            if (other.GetComponent<FollowCommand>().goCarry)
+            {
+                if ((other.tag == "Player") && (plushies.Count < numPlushReq))
+                {
+                    Debug.Log("It's touching but not enough plushies");
+                   notEnoughPlushiesUI.SetActive(true);   
+                }
+                else
+                    plushies.Add(other.gameObject);
+            }
+            else if (other.GetComponent<FollowCommand>().goPush)
+            {
+                youNoDoUI.SetActive(true);
+                Debug.Log("SET ACTIVE You cannot push this object, you imbecile. Try something else.");
+            }
+        }
+ */
