@@ -22,7 +22,6 @@ public class FollowCommand : MonoBehaviour
     private NavMeshAgent nav;
     private Animator anim;
 
-
     //****temporary object to replace selection****
 
     private void Start()

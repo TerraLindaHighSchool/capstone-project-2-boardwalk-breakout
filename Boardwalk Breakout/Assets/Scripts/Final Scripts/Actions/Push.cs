@@ -49,8 +49,7 @@ public class Push : MonoBehaviour
             }
             else if (other.GetComponent<FollowCommand>().goCarry)
             {
-                noDoUI.SetActive(false);
-                Debug.Log("SET ACTIVE You cannot carry this object, you imbecile. Try something else."); //needs text
+                noDoUI.SetActive(true);
                 wrong = true;
             }
         }
@@ -66,8 +65,6 @@ public class Push : MonoBehaviour
             if (!wrong)
             {
                 noDoUI.SetActive(false);
-                Debug.Log("SET INACTIVE You cannot carry this object, you imbecile. Try something else."); //needs text
-                Debug.Log("SET INACTIVE You need more plushies to push this object, you imbecile.");//needs text
             }
         }
     }

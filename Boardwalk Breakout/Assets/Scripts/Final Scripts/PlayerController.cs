@@ -20,8 +20,9 @@ public class PlayerController : MonoBehaviour
 
     CharacterController controller;
     Animator anim;
-    
+
     public int count { get; set; }
+   
 
     void Start()
     {
@@ -35,6 +36,7 @@ public class PlayerController : MonoBehaviour
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
         isGrounded = true;
+        count = 0;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -59,8 +61,8 @@ public class PlayerController : MonoBehaviour
                 other.gameObject.GetComponent<FollowCommand>().enabled = true;
                 other.gameObject.GetComponent<FollowCommand>().playerWait = true;
                 WinLose.currentEvent = (float) WinLose.currentEvent + other.GetComponent<FollowCommand>().needsRescue;
-                Debug.Log(WinLose.currentEvent);
-                Debug.Log(count);
+                //Debug.Log(WinLose.currentEvent);
+                //Debug.Log("This is " + count);
             }
             else if (!other.GetComponent<FollowCommand>().doingTask() == true)
                 other.gameObject.GetComponent<FollowCommand>().playerWait = true;
