@@ -40,8 +40,7 @@ public class Push : MonoBehaviour
             {
                 if (player.GetComponent<PlayerController>().count < numPlushReq)
                 {
-                    morePlushiesUI.SetActive(false);
-                    Debug.Log("SET ACTIVE You need more plushies to push this object, you imbecile."); //needs text
+                    morePlushiesUI.SetActive(true);
                     wrong = true;
                 }
                else
@@ -65,6 +64,7 @@ public class Push : MonoBehaviour
             if (!wrong)
             {
                 noDoUI.SetActive(false);
+                morePlushiesUI.SetActive(false);
             }
         }
     }
