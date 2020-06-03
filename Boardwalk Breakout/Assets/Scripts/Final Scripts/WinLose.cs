@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class WinLose : MonoBehaviour
 {
@@ -21,12 +22,16 @@ public class WinLose : MonoBehaviour
 
     public GameObject winUI;
     public GameObject loseUI;
-   
+    //[SerializeField] public Button playAgainButton;
 
-    private void Start()
+
+    public void Start()
     {
+       /* Button btn = playAgainButton.GetComponent<Button>();
+        btn.onClick.AddListener(taskOnClick);*/
         currentEvent = -1;
     }
+
     void Update()
     {
         if (playerLost)
@@ -53,7 +58,5 @@ public class WinLose : MonoBehaviour
     {
         loseUI.SetActive(true);        
     }
-
-    
 }
     

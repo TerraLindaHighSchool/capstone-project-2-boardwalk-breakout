@@ -41,7 +41,6 @@ public class Carry : MonoBehaviour
             {
                 if ((other.tag == "Player") && (plushies.Count < numPlushReq))
                 {
-                    Debug.Log("It's touching but not enough plushies");
                    notEnoughPlushiesUI.SetActive(true);   
                 }
                 else

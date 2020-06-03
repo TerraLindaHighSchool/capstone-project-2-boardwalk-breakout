@@ -9,6 +9,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenuUI;
     public GameObject howToPlayUI;
     public GameObject gotItUI;
+  
     public AudioSource pause;
     public AudioSource confirm;
     public AudioSource menuSound;
