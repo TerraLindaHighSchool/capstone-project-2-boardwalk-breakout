@@ -9,6 +9,8 @@ public class WinLose : MonoBehaviour
     public static GameObject player { get; set; }
     public int[] events;
     public static float currentEvent { get; set; } //each int represents its event's (in order) required plushies to complete
+
+    private float eventReset = -1;
     /*
      * CURRENT EVENT INDEX
      *  #       Function                                                            Moving onto next event
@@ -16,19 +18,11 @@ public class WinLose : MonoBehaviour
      * 0+: player is doing tasks, lose if don't have required plushies -> "success" statement in each event ++currentEvent (ex: opening the door to a cage)
      * last event: number required to exit the level successfully
      */
-    
+
     public static bool playerLost { get; set; } //activated by guard controller when player is caught
-
-
-    public GameObject winUI;
-    public GameObject loseUI;
-    //[SerializeField] public Button playAgainButton;
-
 
     public void Start()
     {
-       /* Button btn = playAgainButton.GetComponent<Button>();
-        btn.onClick.AddListener(taskOnClick);*/
         currentEvent = -1;
     }
 
@@ -45,18 +39,45 @@ public class WinLose : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (currentEvent == events.Length -1 && other.tag == "Player" && !other.isTrigger && other.GetComponent<PlayerController>().count >= events[events.Length - 1])
-            winUI.SetActive(true);
+            SceneManager.LoadScene(3);
     }
 
     private void numberLose()
     {
-        if ((!(currentEvent < 0) && player.GetComponent<PlayerController>().count < events[(int) currentEvent]))
-            loseUI.SetActive(true);
+        if ((!(currentEvent < 0) && player.GetComponent<PlayerController>().count < events[(int)currentEvent]))
+           SceneManager.LoadScene(4);
     }
 
     public void playerLose()
     {
-        loseUI.SetActive(true);        
+        SceneManager.LoadScene(4);
+        Debug.Log(currentEvent);
     }
+
+
+    //
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnLevelFinishedLoading;
+    }
+
+    void OnDisable()
+        {
+          SceneManager.sceneLoaded -= OnLevelFinishedLoading;
+        }
+
+    void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
+    {
+        eventReseting();
+        Debug.Log(currentEvent);
+
+    }
+
+    void eventReseting()
+    {
+        currentEvent = eventReset;
+    }
+    
 }
     

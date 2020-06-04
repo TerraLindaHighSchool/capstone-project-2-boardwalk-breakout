@@ -849,8 +849,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Danny - Creative Director, Audio Creator\n\nJohn - Prop Modeler, Set Design\n\nMeghan
-    - Project Manager, Programmer,  \n\n"
+  m_Text: "Danny - Creative Director, Audio Creator\n\nJohn - Prop Modeler, Set Design\n\nMeaghan
+    - Project Manager, Programmer, Artist\n\nPavee - Balloon Pop Stand\n\nTristyn 
+    \n\n"
 --- !u!222 &1409475449
 CanvasRenderer:
   m_ObjectHideFlags: 0
