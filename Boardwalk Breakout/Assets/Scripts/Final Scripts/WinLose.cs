@@ -13,6 +13,9 @@ public class WinLose : MonoBehaviour
     private float eventReset = -1;
     public GameObject loseUI;
     public GameObject winUI;
+
+    public static bool gameOverWin { get; set; }
+    public static bool gameOverLose { get; set; }
     /*
      * CURRENT EVENT INDEX
      *  #       Function                                                            Moving onto next event
@@ -26,6 +29,8 @@ public class WinLose : MonoBehaviour
     public void Start()
     {
         currentEvent = -1;
+        gameOverWin = false;
+        gameOverLose = false;
     }
 
     void Update()
@@ -42,19 +47,26 @@ public class WinLose : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (currentEvent == events.Length - 1 && other.tag == "Player" && !other.isTrigger && other.GetComponent<PlayerController>().count >= events[events.Length - 1])
+        {
             winUI.SetActive(true);
+            gameOverWin = true;
+            
+        }
     }
 
     private void numberLose()
     {
         if ((!(currentEvent < 0) && player.GetComponent<PlayerController>().count < events[(int)currentEvent]))
+        {
             loseUI.SetActive(true);
-            
+            gameOverLose = true;
+        }
     }
 
     public void playerLose()
     {
-        loseUI.SetActive(true); 
+        loseUI.SetActive(true);
+        gameOverLose = true;
     }
 
     void OnEnable()
@@ -73,7 +85,7 @@ public class WinLose : MonoBehaviour
         playerLost = false;
         loseUI.SetActive(false);
         winUI.SetActive(false);
-        Debug.Log(currentEvent);
+        FollowCommand.hasTarget = false;
 
     }
 
