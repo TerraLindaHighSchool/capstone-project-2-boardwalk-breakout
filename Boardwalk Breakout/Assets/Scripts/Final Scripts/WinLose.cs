@@ -11,6 +11,8 @@ public class WinLose : MonoBehaviour
     public static float currentEvent { get; set; } //each int represents its event's (in order) required plushies to complete
 
     private float eventReset = -1;
+    public GameObject loseUI;
+    public GameObject winUI;
     /*
      * CURRENT EVENT INDEX
      *  #       Function                                                            Moving onto next event
@@ -28,6 +30,7 @@ public class WinLose : MonoBehaviour
 
     void Update()
     {
+        loseUI.SetActive(false);
         if (playerLost)
         {
             playerLose();
@@ -38,24 +41,21 @@ public class WinLose : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (currentEvent == events.Length -1 && other.tag == "Player" && !other.isTrigger && other.GetComponent<PlayerController>().count >= events[events.Length - 1])
-            SceneManager.LoadScene(3);
+        if (currentEvent == events.Length - 1 && other.tag == "Player" && !other.isTrigger && other.GetComponent<PlayerController>().count >= events[events.Length - 1])
+            winUI.SetActive(true);
     }
 
     private void numberLose()
     {
         if ((!(currentEvent < 0) && player.GetComponent<PlayerController>().count < events[(int)currentEvent]))
-           SceneManager.LoadScene(4);
+            loseUI.SetActive(true);
+            
     }
 
     public void playerLose()
     {
-        SceneManager.LoadScene(4);
-        Debug.Log(currentEvent);
+        loseUI.SetActive(true); 
     }
-
-
-    //
 
     void OnEnable()
     {
@@ -70,6 +70,9 @@ public class WinLose : MonoBehaviour
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
     {
         eventReseting();
+        playerLost = false;
+        loseUI.SetActive(false);
+        winUI.SetActive(false);
         Debug.Log(currentEvent);
 
     }
