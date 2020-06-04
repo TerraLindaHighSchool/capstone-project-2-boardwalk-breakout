@@ -15,6 +15,7 @@ public class MainMenu : MonoBehaviour
        menuSound.GetComponent<AudioSource>();
     }
 
+    //Start Game
     public void startGame()
     {
         confirm.Play();
@@ -24,18 +25,21 @@ public class MainMenu : MonoBehaviour
 
     }
 
+    //How To Play Page
     public void howToPlayGame()
     {
        menuSound.Play();
        SceneManager.LoadScene("How To Play");
     }
 
+    //Credit Page
     public void credits()
     {
         menuSound.Play();
         SceneManager.LoadScene("Credit Page");
     }
 
+    //Exit Game
     public void exitGame()
     {
         confirm.Play();
