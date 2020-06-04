@@ -14,10 +14,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/UI Menus/How To Play.unity
     guid: 08ecb772c498c4ca08eabcbdd320c13f
-  - enabled: 1
-    path: Assets/Scenes/UI Menus/Win.unity
-    guid: a3e5ddecb62724e8588c6c9176234e22
-  - enabled: 1
-    path: Assets/Scenes/UI Menus/Lose.unity
-    guid: 1364e71e9a76446c4acad0b99d741f08
   m_configObjects: {}
