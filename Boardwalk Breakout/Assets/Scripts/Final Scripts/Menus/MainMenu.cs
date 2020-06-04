@@ -27,12 +27,18 @@ public class MainMenu : MonoBehaviour
     public void howToPlayGame()
     {
        menuSound.Play();
-       SceneManager.LoadScene(2);
+       SceneManager.LoadScene("How To Play");
+    }
+
+    public void credits()
+    {
+        menuSound.Play();
+        SceneManager.LoadScene("Credit Page");
     }
 
     public void exitGame()
     {
         confirm.Play();
         Application.Quit(); 
-    } 
+    }
 }

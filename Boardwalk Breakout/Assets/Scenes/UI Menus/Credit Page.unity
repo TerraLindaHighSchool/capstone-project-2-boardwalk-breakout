@@ -155,8 +155,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 37, y: -75}
-  m_SizeDelta: {x: 413.6, y: 99}
+  m_AnchoredPosition: {x: -77, y: -194}
+  m_SizeDelta: {x: 989, y: 242.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &66262115
 MonoBehaviour:
@@ -205,8 +205,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 100
-  m_fontSizeBase: 100
+  m_fontSize: 275
+  m_fontSizeBase: 275
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -289,6 +289,7 @@ GameObject:
   - component: {fileID: 542480941}
   - component: {fileID: 542480940}
   - component: {fileID: 542480939}
+  - component: {fileID: 542480943}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -378,6 +379,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &542480943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 542480938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49a6cc6567d164bbfaf627602a90856d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  confirm: {fileID: 1356551391}
+  menuSound: {fileID: 1346662344}
 --- !u!1 &899720347
 GameObject:
   m_ObjectHideFlags: 0
@@ -815,8 +830,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0000076293945, y: -4.6}
-  m_SizeDelta: {x: 835.5, y: 322.2}
+  m_AnchoredPosition: {x: 170, y: 0.000011444}
+  m_SizeDelta: {x: 1831.2, y: 966.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1409475448
 MonoBehaviour:
@@ -838,20 +853,35 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 58b647c5b2ec4184e9a07a561cdf0644, type: 3}
-    m_FontSize: 40
+    m_FontSize: 90
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
-    m_MaxSize: 40
+    m_MaxSize: 90
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Danny - Creative Director, Audio Creator\n\nJohn - Prop Modeler, Set Design\n\nMeaghan
-    - Project Manager, Programmer, Artist\n\nPavee - Balloon Pop Stand\n\nTristyn 
-    \n\n"
+  m_Text: 'Meaghan Boykin - Project Manager, Primary/Secondary Characters/Effects
+    Programmer, Artist
+
+
+    Tristyn Lai - Project Manager, Animation/Menus/Effects
+    Programmer
+
+
+    Danny Meza - Creative Director, Audio Producer
+
+
+    John Ly-
+    Prop Modeler, Set Design
+
+
+    Pavee Aswanetmanee- Balloon Pop Stand
+
+'
 --- !u!222 &1409475449
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -917,7 +947,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 58b647c5b2ec4184e9a07a561cdf0644, type: 3}
-    m_FontSize: 40
+    m_FontSize: 80
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
@@ -973,8 +1003,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 70.05}
-  m_SizeDelta: {x: 561.5, y: 140.1}
+  m_AnchoredPosition: {x: -77, y: 183}
+  m_SizeDelta: {x: 662.25, y: 140.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1776904081
 MonoBehaviour:
@@ -1019,7 +1049,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 542480943}
         m_MethodName: returnToMenu
         m_Mode: 1
         m_Arguments:
