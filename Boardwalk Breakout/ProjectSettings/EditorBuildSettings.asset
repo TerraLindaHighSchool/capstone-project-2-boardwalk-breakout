@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/UI Menus/How To Play.unity
     guid: 08ecb772c498c4ca08eabcbdd320c13f
+  - enabled: 1
+    path: Assets/Scenes/UI Menus/Credit Page.unity
+    guid: 76c542fc14a5b481bbb6b9f8ed0be8ea
   m_configObjects: {}

@@ -11,9 +11,7 @@ public class HowToPlay : MonoBehaviour
     void Start()
     {
        confirm.GetComponent<AudioSource>();
-       menuSound.GetComponent<AudioSource>();
-        menuSound.Play();
-        
+       menuSound.GetComponent<AudioSource>();     
     }
 
     public void returnToMenu()
