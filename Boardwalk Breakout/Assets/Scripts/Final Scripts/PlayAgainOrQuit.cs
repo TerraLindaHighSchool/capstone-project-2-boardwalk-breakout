@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class PlayAgainOrQuit : MonoBehaviour
 {
     public AudioSource confirm;
-    public GameObject playAgainUI;
 
     private void Start()
     {
@@ -22,18 +21,8 @@ public class PlayAgainOrQuit : MonoBehaviour
 
     public void playAgain()
     {
-        playAgainUI.SetActive(false);
         Time.timeScale = 1f;
         confirm.Play();
-        //SceneManager.LoadScene("Level Design"); 
+        SceneManager.LoadScene("Level Design"); 
     }
-
-
-    /*public void gotIt()
-    {
-        gotItUI.SetActive(false);
-        Time.timeScale = 1f;
-        gameIsPaused = false;
-        confirm.Play();
-    }*/
 }
