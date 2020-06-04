@@ -9,6 +9,9 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenuUI;
     public GameObject howToPlayUI;
     public GameObject gotItUI;
+
+    public GameObject loseUI;
+    public GameObject winUI;
   
     public AudioSource pause;
     public AudioSource confirm;
@@ -48,7 +51,6 @@ public class PauseMenu : MonoBehaviour
 
     void Pause()
     {
-
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         gameIsPaused = true;
@@ -84,4 +86,6 @@ public class PauseMenu : MonoBehaviour
         gameIsPaused = false;
         confirm.Play();
     }
+
+
 }
