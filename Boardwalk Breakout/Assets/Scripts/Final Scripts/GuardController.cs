@@ -32,6 +32,10 @@ public class GuardController : MonoBehaviour
         {
             Destroy(other.gameObject);
             player.GetComponent<PlayerController>().count--;
+            if(WinLose.currentEvent < 0)
+            {
+                WinLose.numLose = true;
+            }
         }
         else if (other.tag == "Player" && !other.isTrigger)
             WinLose.playerLost = true;

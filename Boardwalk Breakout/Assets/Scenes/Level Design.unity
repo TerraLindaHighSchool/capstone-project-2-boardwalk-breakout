@@ -18454,7 +18454,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numPlushReq: 2
-  wrong: 0
   notEnoughPlushiesUI: {fileID: 273285482}
   youNoDoUI: {fileID: 348199884}
 --- !u!65 &1435386095
@@ -18504,7 +18503,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 8.3, y: -83.1001}
+  m_AnchoredPosition: {x: 3, y: -83}
   m_SizeDelta: {x: 414.7, y: 125.12}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1438933875
@@ -26536,8 +26535,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 3.3000488, y: 10.786011}
-  m_SizeDelta: {x: 39.4, y: 21.572}
+  m_AnchoredPosition: {x: 3.3000488, y: 2.2612305}
+  m_SizeDelta: {x: 39.4, y: 38.622}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2027397106
 MonoBehaviour:
@@ -26647,10 +26646,9 @@ MonoBehaviour:
     of the guards who can snatch you and your friends.\n\nYour Abilities:\n\nW,A,S,D
     - To move \n\nPlushies Abilities:\n\n1 - Push\n(you must touch the object first)\n2
     - Carry\n(you must touch the object first)\n3 - Wait\n\nTab - Stops plushies'
-    current actions and returns back to the player.  \n\nEsc - Pause the game\n\nHINTS:\nIf
-    you lose one bear or more, game over! No bear gets left behind!\n\nWhen using
-    Push and Carry, you can't switch between these two actions quickly, or else your
-    plushies will get confused. Remember: you're the brains to this operation! "
+    current actions and returns back to the player.  \n\nEsc - Pause the game\n\nHINTS:\nWhen
+    using Push and Carry, you can't switch between these two actions quickly, or
+    else your plushies will get confused. Remember: you're the brains to this operation! "
 --- !u!222 &2030564818
 CanvasRenderer:
   m_ObjectHideFlags: 0
