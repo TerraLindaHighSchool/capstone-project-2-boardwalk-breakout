@@ -17,7 +17,7 @@ public class Carry : MonoBehaviour
 
     //private bool dropped;
 
-    public bool wrong;
+    public bool wrong { get; set; }
 
     public GameObject notEnoughPlushiesUI;
     public GameObject youNoDoUI;
@@ -116,7 +116,7 @@ public class Carry : MonoBehaviour
     {
         FollowCommand.hasTarget = false;
         FollowCommand.targetObj = null;
-        for (int i = plushies.Count-1; i >= 0; i--)
+        for (int i = plushies.Count - 1; i >= 0; i--)
         {
             plushies[i].transform.SetParent(null);
             plushies[i].GetComponent<NavMeshAgent>().enabled = true;

@@ -19,8 +19,7 @@ public class MainMenu : MonoBehaviour
     public void startGame()
     {
         confirm.Play();
-        Application.LoadLevel(1);
-        //SceneManager.LoadScene(1);
+        SceneManager.LoadScene(1);
         //loseUI.SetActive(false);
 
     }

@@ -16,6 +16,7 @@ public class WinLose : MonoBehaviour
 
     public static bool gameOverWin { get; set; }
     public static bool gameOverLose { get; set; }
+    public static bool numLose { get; set; }
     /*
      * CURRENT EVENT INDEX
      *  #       Function                                                            Moving onto next event
@@ -50,13 +51,13 @@ public class WinLose : MonoBehaviour
         {
             winUI.SetActive(true);
             gameOverWin = true;
-            
+
         }
     }
 
     private void numberLose()
     {
-        if ((!(currentEvent < 0) && player.GetComponent<PlayerController>().count < events[(int)currentEvent]))
+        if ((!(currentEvent < 0) && player.GetComponent<PlayerController>().count < events[(int)currentEvent]) || numLose)
         {
             loseUI.SetActive(true);
             gameOverLose = true;
@@ -86,6 +87,7 @@ public class WinLose : MonoBehaviour
         loseUI.SetActive(false);
         winUI.SetActive(false);
         FollowCommand.hasTarget = false;
+        numLose = false;
 
     }
 
